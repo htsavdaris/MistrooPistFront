@@ -1,0 +1,85 @@
+<div>
+    <h3>Κατάλογος Πιστοποιημένων Εκτιμητών - Νομικών Προσώπων</h3>
+</div>
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Νέα Εγγραφή" icon="pi pi-plus" class="p-button-success p-mr-2"></button>            
+        </ng-template>
+        <ng-template pTemplate="right">            
+            <button pButton pRipple label="Εξαγωγή" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="nomika" [rows]="10" [paginator]="true" [rowHover]="true" dataKey="fldAM"
+        currentPageReportTemplate="Εμφάνιση {first} έως {last} από {totalRecords} εγγραφές" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <!-- <h5 class="p-m-0">Manage Products</h5> -->
+                <!-- <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                </span> -->
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem"></th>
+                <th pSortableColumn="fldAM">AM<p-sortIcon field="fldAM"></p-sortIcon></th>
+                <th pSortableColumn="fldEponymia">ΕΠΩΝΥΜΟ<p-sortIcon field="fldEponymia"></p-sortIcon></th>
+                <th pSortableColumn="fldYpefthinos">ΟΝΟΜΑ<p-sortIcon field="fldYpefthinos"></p-sortIcon></th>
+                <th pSortableColumn="fldDieythynsi">ΠΑΤΡΩΝΥΜΟ<p-sortIcon field="fldDieythynsi"></p-sortIcon></th>
+                <th pSortableColumn="fldNomos">ΔΙΕΥΘΥΝΣΗ<p-sortIcon field="fldNomos"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-nomiko let-expanded="expanded">
+            <tr>
+                <td>
+                    <button type="button" pButton pRipple [pRowToggler]="nomiko" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-minus-circle' : 'pi pi-plus-circle'"></button>
+                </td>
+                <td>{{nomiko.fldAM}}</td>
+                <td>{{nomiko.fldEponymia}}</td>
+                <td>{{nomiko.fldYpefthinos}}</td>
+                <td>{{nomiko.fldDieythynsi}}</td>
+                <td>{{nomiko.fldNomos}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-nomiko >
+            <tr>
+                <td colspan="4" style="padding-top: 0px;"> 
+                    <div class="p-grid -fluid" style="font-size:14px;padding:10px">                        
+                        <div class="p-col-12 p-md-9">
+                            <div class="p-grid">
+                                <div class="p-col-12">
+                                    <b>AM:</b> {{nomiko.fldAM}}
+                                </div>
+                                <div class="p-col-12">
+                                    <b>ΕΠΩΝΥΜΟ:</b> {{nomiko.fldEponymia}}
+                                </div>
+                                <div class="p-col-12">
+                                    <b>ΟΝΟΜΑ:</b> {{nomiko.fldYpefthinos}}
+                                </div>
+                                <div class="p-col-12">
+                                    <b>ΠΑΤΡΩΝΥΜΟ:</b> {{nomiko.fldPatronymo}}
+                                </div>
+                                <div class="p-col-12">
+                                    <b>ΔΙΕΥΘΥΝΣΗ:</b> {{nomiko.fldDieythynsi}}
+                                </div>
+                                <div class="p-col-12">
+                                    <b>ΝΟΜΟΣ:</b> {{nomiko.fldNomos}}
+                                </div>
+                                <div class="p-col-12">
+                                    <b>eMail:</b> {{nomiko.fldTilefono}}
+                                </div>
+                                <div class="p-col-12">
+                                    <b>ΤΗΛ:</b> {{nomiko.fldEmail}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

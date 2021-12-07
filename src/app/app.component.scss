@@ -1,0 +1,51 @@
+.content-wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 960px;
+    margin-top: 0px;
+}
+
+  .container{
+    display: grid
+}
+
+.govgrheader {
+    background-color: #ffffff;
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: 350px  1fr ;
+}
+
+.govimage {
+    width: 240px; /* you can use % */
+    height: auto;
+}
+
+.menuarea {    
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: 180px 1fr ;
+}
+
+h1, h2,h3 {
+    display: inline;
+    font-family: 'Roboto', sans-serif;
+    color: #003476;
+}
+
+.button {
+    font-family: 'Roboto', sans-serif;
+    font: bold 14px ;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #003476;
+    padding: 2px 6px 2px 6px;
+    
+  }
+
+  a[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: -100%;
+    left: 0;
+  }

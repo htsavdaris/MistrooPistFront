@@ -1,0 +1,180 @@
+<div>
+    <h3 style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #2e89f1;">Κατάλογος Πιστοποιημένων Εκτιμητών -
+        Φυσικών Προσώπων</h3>
+</div>
+<div class="card">
+    <div class="card-container blue-container">
+
+        <p-toolbar styleClass="p-mb-4">
+            <ng-template pTemplate="left">
+                <button pButton pRipple label="Νέα Εγγραφή" icon="pi pi-plus" class="p-mr-2"
+                    (click)="createItem()"></button>
+            </ng-template>
+            <!-- <ng-template pTemplate="right">            
+            <button pButton pRipple label="Εξαγωγή" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template> -->
+        </p-toolbar>
+
+        <p-table #dt [value]="fysika" [rows]="10" [paginator]="true" [rowHover]="true" dataKey="fldam" styleClass="p-datatable-sm"
+            currentPageReportTemplate="Εμφάνιση {first} έως {last} από {totalRecords} εγγραφές"
+            [showCurrentPageReport]="true">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    <!-- <h5 class="p-m-0">Manage Products</h5> -->
+                    <!-- <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                </span> -->
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 2rem"></th>
+                    <th style="width: 4rem" pSortableColumn="fldam">AM<p-sortIcon field="fldam"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="fldeponymo">ΕΠΩΝΥΜΟ<p-sortIcon field="fldeponymo"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="fldonoma">ΟΝΟΜΑ<p-sortIcon field="fldonoma"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="fldpatronymo">ΠΑΤΡΩΝΥΜΟ<p-sortIcon field="fldpatronymo"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="flddiefthinsi">ΔΙΕΥΘΥΝΣΗ<p-sortIcon field="flddiefthinsi"></p-sortIcon>
+                    </th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-fysiko let-expanded="expanded">
+                <tr styleClass = "custorow">
+                    <td>
+                        <button type="button" pButton pRipple [pRowToggler]="fysiko"
+                            class="p-button-text p-button-rounded p-button-plain"
+                            [icon]="expanded ? 'pi pi-minus-circle' : 'pi pi-plus-circle'"></button>
+                    </td>
+                    <td>{{fysiko.fldam}}</td>
+                    <td>{{fysiko.fldeponymo}}</td>
+                    <td>{{fysiko.fldonoma}}</td>
+                    <td>{{fysiko.fldpatronymo}}</td>
+                    <td>{{fysiko.flddiefthinsi}}</td>
+                    <td> <span *ngIf="(isLoggedIn | async)">
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                                (click)="editItem(fysiko)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                (click)="deleteItem()"></button>
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" let-fysiko>
+                <tr>
+                    <td colspan="7" style="padding-top: 0px;">
+                        <div class="p-grid -fluid" style="font-size:14px;padding:10px">
+                            <div class="p-col-12 p-md-9">
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+                                        <b>AM:</b> {{fysiko.fldam}}
+                                    </div>
+                                    <div class="p-col-12">
+                                        <b>ΕΠΩΝΥΜΟ:</b> {{fysiko.fldeponymo}}
+                                    </div>
+                                    <div class="p-col-12">
+                                        <b>ΟΝΟΜΑ:</b> {{fysiko.fldonoma}}
+                                    </div>
+                                    <div class="p-col-12">
+                                        <b>ΠΑΤΡΩΝΥΜΟ:</b> {{fysiko.fldpatronymo}}
+                                    </div>
+                                    <div class="p-col-12">
+                                        <b>ΔΙΕΥΘΥΝΣΗ:</b> {{fysiko.flddiefthinsi}}
+                                    </div>
+                                    <div class="p-col-12">
+                                        <b>ΝΟΜΟΣ:</b> {{fysiko.fldnomos}}
+                                    </div>
+                                    <div class="p-col-12">
+                                        <b>eMail:</b> {{fysiko.fldemail}}
+                                    </div>
+                                    <div class="p-col-12">
+                                        <b>ΤΗΛ:</b> {{fysiko.fldtilefono}}
+                                    </div>
+                                    <div class="p-col-12">
+                                        <b>ΠΙΣΤΟΠΟΙΗΣΗ:</b> {{fysiko.fldcertification}}
+                                    </div>
+                                    <div class="p-col-12">
+                                        <b>ΕΙΔΙΚΟΤΗΤΑ:</b> {{fysiko.fldeidikotita}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+
+<p-dialog [(visible)]="itemDialogShow" [style]="{width: '680px'}" header="Διαχείριση Φυσικού Προσώπου" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-grid p-fluid">
+            <div class="p-col-12 p-md-3">
+                <div class="p-field" style="padding-bottom: 4px;">
+                    <label for="fldam">AΡΙΘΜΟΣ ΜΗΤΡΩΟΥ</label>
+                    <input type="text" pInputText id="fldam" [disabled]="AMdisabled" [(ngModel)]="fysiko.fldam" required
+                        autofocus />
+                    <small class="p-error" *ngIf="submitted && !fysiko.fldam">fldAM is required.</small>
+                </div>
+            </div>
+            <div class="p-col-12 p-md-8">
+                <div class="p-field" style="padding-bottom: 4px;">
+                    <label for="fldeponymo">ΕΠΩΝΥΜΟ</label>
+                    <input type="text" pInputText id="fldeponymo" [(ngModel)]="fysiko.fldeponymo" required />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="p-field" style="padding-bottom: 4px;">
+            <label for="fldonoma">ΟΝΟΜΑ</label>
+            <input type="text" pInputText id="fldonoma" [(ngModel)]="fysiko.fldonoma" placeholder="Εισάγετε το Όνομα"
+                required />
+        </div>
+        <div class="p-field" style="padding-bottom: 4px;">
+            <label for="fldpatronymo">ΠΑΤΡΩΝΥΜΟ</label>
+            <input type="text" pInputText id="fldpatronymo" [(ngModel)]="fysiko.fldpatronymo" required />
+        </div>
+        <div class="p-field" style="padding-bottom: 4px;">
+            <label for="flddiefthinsi">ΔΙΕΥΘΥΝΣΗ</label>
+            <input type="text" pInputText id="flddiefthinsi" [(ngModel)]="fysiko.flddiefthinsi" required />
+        </div>
+        <div class="p-field" style="padding-bottom: 4px;">
+            <label for="fldnomos">ΝΟΜΟΣ</label>
+            <input type="text" pInputText id="fldnomos" [(ngModel)]="fysiko.fldnomos" required />
+        </div>
+        <div class="p-field" style="padding-bottom: 4px;">
+            <label for="fldemail">eMail</label>
+            <input type="text" pInputText id="fldemail" [(ngModel)]="fysiko.fldemail" required />
+        </div>
+        <div class="p-field" style="padding-bottom: 4px;">
+            <label for="fldtilefono">ΤΗΛ</label>
+            <input type="text" pInputText id="fldtilefono" [(ngModel)]="fysiko.fldtilefono" required />
+        </div>
+        <div class="p-field" style="padding-bottom: 4px;">
+            <label for="fldcertification">ΠΙΣΤΟΠΟΙΗΣΗ</label>
+            <input type="text" pInputText id="fldcertification" [(ngModel)]="fysiko.fldcertification" required />
+        </div>
+        <div class="p-field" style="padding-bottom: 6px;">
+            <label for="fldeidikotita">ΕΙΔΙΚΟΤΗΤΑ</label>
+            <input type="text" pInputText id="fldeidikotita" [(ngModel)]="fysiko.fldeidikotita" required />
+        </div>
+        <p-checkbox [(ngModel)]="fysiko.flda" [binary]="true" label="A - "></p-checkbox>
+        <p-checkbox [(ngModel)]="fysiko.fldb" [binary]="true" label="B - "></p-checkbox>
+        <p-checkbox [(ngModel)]="fysiko.fldc" [binary]="true" label="Γ - "></p-checkbox>
+        <p-checkbox [(ngModel)]="fysiko.fldd" [binary]="true" label="Δ - "></p-checkbox>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Ακύρωση" icon="pi pi-times" class="p-button-text"
+            (click)="hideDialog()"></button>
+        <button pButton pRipple label="Αποθήκευση" icon="pi pi-check" class="p-button-text"
+            (click)="saveItem()"></button>
+    </ng-template>
+</p-dialog>

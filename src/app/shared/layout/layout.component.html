@@ -1,0 +1,15 @@
+<div class="content-wrapper">
+    <div class="govgrheader">
+        <img src="./../../../assets/minfin_logo.png" alt="Ministry of Finance" class="govimage">
+        <h3>Σύστημα Πιστοποιημένων Εκτιμητών</h3>
+    </div>
+    <div class="menuarea">
+        <a [routerLink]="['/home']" title="Αρχική" class="button">Αρχική</a>
+        <a [routerLink]="['/fysika']" href="./fysika" title="Εμφάνιση Φυσικών Προσώπων" class="button">Φυσικά Πρόσωπα</a>
+        <a [routerLink]="['/nomika']" title="Εμφάνιση Νομικών Προσώπων" class="button">Νομικά Πρόσωπα</a>
+        <a href="" *ngIf="(isLoggedIn | async)" (click)="authService.logout()" title="Logout" class="button">Logout</a>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
