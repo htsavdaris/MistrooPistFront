@@ -53,7 +53,7 @@ export class AuthService {
       );
   }
 
-  changepassword(changepass: any): Observable<string> {
+  changepassword(changepass: Changepass): Observable<string> {
     return this.http.post<string>(this.myAppUrl + this.myApiUrl + 'changepassword', JSON.stringify(changepass), this.httpOptions)
       .pipe(
         map((data: any) => {                    

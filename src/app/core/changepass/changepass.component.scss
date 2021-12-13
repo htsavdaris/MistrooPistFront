@@ -3,7 +3,7 @@
 //  }
  
 
-.loginpage{
+.changepasspage{
     height: 100%;
     width: 100%;
     display: flex;    
@@ -25,18 +25,18 @@
     margin-right: 30px;
 }
 
-.loginsection{
+.changepasssection{
     display: flex;  
     align-items: center;
     justify-content: center;    
     flex-direction: row;  
 }
 
-.loginform{
+.changepassform{
     width: 450px;    
 }
 
-.loginheader
+.changepassheader
 {
     font-size: large;
     margin: 20px; 

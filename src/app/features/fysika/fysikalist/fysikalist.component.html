@@ -4,18 +4,19 @@
 </div>
 <div class="card">
     <div class="card-container blue-container">
-
-        <p-toolbar styleClass="p-mb-4">
-            <ng-template pTemplate="left">
-                <button pButton pRipple label="Νέα Εγγραφή" icon="pi pi-plus" class="p-mr-2"
-                    (click)="createItem()"></button>
-            </ng-template>
-            <!-- <ng-template pTemplate="right">            
+        <div *ngIf="(isLoggedIn | async)">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                    <button pButton pRipple label="Νέα Εγγραφή" icon="pi pi-plus" class="p-mr-2"
+                        (click)="createItem()"></button>
+                </ng-template>
+                <!-- <ng-template pTemplate="right">            
             <button pButton pRipple label="Εξαγωγή" icon="pi pi-upload" class="p-button-help"></button>
         </ng-template> -->
-        </p-toolbar>
-
-        <p-table #dt [value]="fysika" [rows]="10" [paginator]="true" [rowHover]="true" dataKey="fldam" styleClass="p-datatable-sm"
+            </p-toolbar>
+        </div>
+        <p-table #dt [value]="fysika" [rows]="10" [paginator]="true" [rowHover]="true" dataKey="fldam"
+            styleClass="p-datatable-sm"
             currentPageReportTemplate="Εμφάνιση {first} έως {last} από {totalRecords} εγγραφές"
             [showCurrentPageReport]="true">
             <ng-template pTemplate="caption">
@@ -44,7 +45,7 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-fysiko let-expanded="expanded">
-                <tr styleClass = "custorow">
+                <tr styleClass="custorow">
                     <td>
                         <button type="button" pButton pRipple [pRowToggler]="fysiko"
                             class="p-button-text p-button-rounded p-button-plain"

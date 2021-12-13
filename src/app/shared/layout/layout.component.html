@@ -5,11 +5,14 @@
     </div>
     <div class="menuarea">
         <a [routerLink]="['/home']" title="Αρχική" class="button">Αρχική</a>
-        <a [routerLink]="['/fysika']" href="./fysika" title="Εμφάνιση Φυσικών Προσώπων" class="button">Φυσικά Πρόσωπα</a>
         <a [routerLink]="['/nomika']" title="Εμφάνιση Νομικών Προσώπων" class="button">Νομικά Πρόσωπα</a>
-        <a href="" *ngIf="(isLoggedIn | async)" (click)="authService.logout()" title="Logout" class="button">Logout</a>
+        <a [routerLink]="['/fysika']" title="Εμφάνιση Φυσικών Προσώπων" class="button">Φυσικά Πρόσωπα</a>
+        <a href="" *ngIf="(isLoggedIn | async)" (click)="authService.logout()" title="Logout" class="button">Αποσύνδεση</a>
     </div>
     <div>
         <router-outlet></router-outlet>
+    </div>
+    <div>
+        Υλοποίηση ΓΓΠΣΔΔ 2021 
     </div>
 </div>

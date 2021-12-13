@@ -1,22 +1,21 @@
 <div class="loginpage">
-  <div class="content-wrapper">
-    <div class="govgrheader">
-        <img src="./../../../assets/minfin_logo.png" alt="Ministry of Finance" class="govimage" style="zoom: 80%;">
-        <!-- <h3>Σύστημα Πιστοποιημένων Εκτιμητών</h3> -->
-    </div>
+  <div class="govgrheader">
+    <img src="./../../../assets/minfin_logo.png" alt="Ministry of Finance" class="govimage">
+    <h3>Σύστημα Πιστοποιημένων Εκτιμητών</h3>
   </div>
+  <div class="loginsection">
     <form [formGroup]="loginForm" class="loginform">
-      <p-card header="Login" class="loginheader">
+      <p-card header="Eίσοδος στο Σύστημα" class="loginheader">
         <div class="p-field p-grid">
           <label for="login" class="p-col" style="width:40%">Login</label>
           <div class="p-col" style="width: 240px;">
-            <input type="text" placeholder="Username" formControlName="login" pInputText >
+            <input type="text" placeholder="Username" formControlName="login" pInputText>
           </div>
         </div>
         <div class="p-field p-grid">
           <label for="password" class="p-col" style="width:40%">Password</label>
           <div class="p-col">
-            <p-password placeholder="Enter your password" formControlName="password" [feedback]="false" ></p-password>
+            <p-password placeholder="Enter your password" formControlName="password" [feedback]="false"></p-password>
           </div>
         </div>
         <div style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
@@ -24,9 +23,9 @@
           <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
         </div>
         <div>
-        <p-messages [(value)]="errormsg" [enableService]="false"></p-messages>
+          <p-messages [(value)]="errormsg" [enableService]="false"></p-messages>
         </div>
       </p-card>
     </form>
-    
   </div>
+</div>

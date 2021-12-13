@@ -1,7 +1,7 @@
 .content-wrapper {
     margin-right: auto;
     margin-left: auto;
-    max-width: 960px;
+    max-width: 1240px;
     margin-top: 0px;
 }
 
@@ -24,7 +24,7 @@
 .menuarea {    
     display: grid;
     grid-column-gap: 10px;
-    grid-template-columns: 110px 180px 1fr ;
+    grid-template-columns: 90px 180px 180px 1fr ;
     background-color: #003476;
     height: 45px;
 }
@@ -45,6 +45,7 @@ h1, h2,h3 {
     padding: 10px 6px 2px 6px;   
     background-color: 003476; 
   }
+ 
 
 .button:hover {
   color:rgb(251, 255, 0);  

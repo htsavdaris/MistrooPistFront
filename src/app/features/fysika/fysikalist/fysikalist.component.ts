@@ -18,6 +18,7 @@ enum recordState  {
   styleUrls: ['./fysikalist.component.scss']
 })
 export class FysikalistComponent implements OnInit {
+  
   fysika: Fysiko[] = [];
   fysiko: Fysiko = new Fysiko();
   isLoggedIn!: Observable<boolean>;

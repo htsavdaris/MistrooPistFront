@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: () => import('src/app/core/login/login.module').then(m => m.LoginModule)
   },
   {
+    path: 'changepass',
+    loadChildren: () => import('src/app/core/changepass/changepass.module').then(m => m.ChangepassModule)
+  },
+  {
     path: '',
     component: LayoutComponent,
     children: [
