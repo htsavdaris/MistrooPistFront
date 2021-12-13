@@ -1,43 +1,56 @@
 <div class="changepasspage">
-    <div class="govgrheader">
-      <img src="./../../../assets/minfin_logo.png" alt="Ministry of Finance" class="govimage">
-      <h3>Σύστημα Πιστοποιημένων Εκτιμητών</h3>
-    </div>
-    <div class="changepasssection">
-      <form [formGroup]="changePassForm" class="changepassform">
-        <p-card header="Αλλαγή Συνθηματικού" class="changepassheader">
-          <div class="p-field p-grid">
-            <label for="login" class="p-col" style="width:40%">Login</label>
-            <div class="p-col" style="width: 240px;">
-              <input type="text" placeholder="Username" formControlName="login" pInputText>
+  <div class="govgrheader">
+    <img src="./../../../assets/minfin_logo.png" alt="Ministry of Finance" class="govimage">
+    <h3>Σύστημα Πιστοποιημένων Εκτιμητών</h3>
+  </div>
+  <div class="changepasssection">
+    <form [formGroup]="changePassForm" class="changepassform">
+      <p-card header="Αλλαγή Συνθηματικού" class="changepassheader">
+        <div class="p-field p-grid">
+          <label for="login" class="p-col" style="width:40%">Login</label>
+          <div class="p-col" style="width: 240px;">
+            <input type="text" placeholder="Username" formControlName="login" [(ngModel)] = "curuser"  pInputText>
+          </div>
+        </div>
+        <div class="p-field p-grid">
+          <label for="oldpass" class="p-col" style="width:40%">Password</label>
+          <div class="p-col">
+            <p-password placeholder="Old password" formControlName="oldpass" [feedback]="false"></p-password>
+          </div>
+        </div>
+        <div class="p-field p-grid">
+          <label for="newpass" class="p-col" style="width:40%">New Password</label>
+          <div class="p-col">
+            <p-password placeholder="Enter new password" formControlName="newpass" [feedback]="false" required></p-password>
+            <div *ngIf="changePassForm.controls.newpass.invalid && (changePassForm.controls.newpass.dirty || changePassForm.controls.newpass.touched)">
+                <div *ngIf="changePassForm.controls.newpass.errors?.['required']">
+                  <p-message severity="error" text="To νέο συνθηματικό δεν μπορεί να είναι κένο"></p-message>
+              </div>
+              <div *ngIf="changePassForm.controls.newpass.errors?.['minlength']">
+                <p-message severity="error" text="To νέο συνθηματικό πρέπει να έχει μήκος μεγαλύτερο από 5 χαρακτήρες"></p-message>
+              </div>             
             </div>
           </div>
-          <div class="p-field p-grid">
-            <label for="oldpass" class="p-col" style="width:40%">Password</label>
-            <div class="p-col">
-              <p-password placeholder="Enter your password" formControlName="oldpass" [feedback]="false"></p-password>
-            </div>
-          </div>
-          <div class="p-field p-grid">
-            <label for="newpass" class="p-col" style="width:40%">New Password</label>
-            <div class="p-col">
-              <p-password placeholder="Enter your password" formControlName="newpass" [feedback]="false"></p-password>
-            </div>
-          </div>
-          <div class="p-field p-grid">
-            <label for="newpass2" class="p-col" style="width:40%">Retype Password</label>
-            <div class="p-col">
-              <p-password placeholder="Retype your password" formControlName="newpass2" [feedback]="false"></p-password>
+        </div>
+        <div class="p-field p-grid">
+          <label for="newpass2" class="p-col" style="width:40%">Retype Password</label>
+          <div class="p-col">
+            <p-password placeholder="Retype new password" formControlName="newpass2" [feedback]="false" required></p-password>
+            <div
+              *ngIf="changePassForm.errors?.['passwordsDoNotMatchValidator'] && (changePassForm.touched || changePassForm.dirty)">              
+              <p-message severity="error" text="Τα συνθηματικά δεν είναι ίδια"></p-message>
             </div>
           </div>
           <div style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
-            <p-button label="Login" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="changepass()"></p-button>
+            <p-button label="Chnage" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="changepass()">
+            </p-button>
             <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
           </div>
           <div>
             <p-messages [(value)]="errormsg" [enableService]="false"></p-messages>
           </div>
-        </p-card>
-      </form>
-    </div>
+        </div>
+      </p-card>
+    </form>
   </div>
+</div>

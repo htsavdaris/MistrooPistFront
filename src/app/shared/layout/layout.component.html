@@ -1,18 +1,23 @@
 <div class="content-wrapper">
     <div class="govgrheader">
-        <img src="./../../../assets/minfin_logo.png" alt="Ministry of Finance" class="govimage">
-        <h3>Σύστημα Πιστοποιημένων Εκτιμητών</h3>
+        <div>
+            <img src="./../../../assets/minfin_logo.png" alt="Ministry of Finance" class="govimage">
+        </div>
+        <div style="margin-left: 100px;">
+            <h3>Σύστημα Πιστοποιημένων Εκτιμητών</h3>
+        </div>
     </div>
     <div class="menuarea">
         <a [routerLink]="['/home']" title="Αρχική" class="button">Αρχική</a>
         <a [routerLink]="['/nomika']" title="Εμφάνιση Νομικών Προσώπων" class="button">Νομικά Πρόσωπα</a>
         <a [routerLink]="['/fysika']" title="Εμφάνιση Φυσικών Προσώπων" class="button">Φυσικά Πρόσωπα</a>
-        <a href="" *ngIf="(isLoggedIn | async)" (click)="authService.logout()" title="Logout" class="button">Αποσύνδεση</a>
+        <a href="" *ngIf="(isLoggedIn | async)" (click)="authService.logout()" title="Logout"
+            class="button">Αποσύνδεση</a>
     </div>
     <div>
         <router-outlet></router-outlet>
     </div>
     <div>
-        Υλοποίηση ΓΓΠΣΔΔ 2021 
+        Υλοποίηση ΓΓΠΣΔΔ 2021
     </div>
 </div>

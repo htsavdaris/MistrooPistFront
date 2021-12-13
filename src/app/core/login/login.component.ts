@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
          ];
            //this.errormsg.push({severity:'error', summary:'Error Message', detail:'Wrong login or password'});
            //this.errormsg.push({severity:'info', summary:'Error Message', detail:'Wrong login or password'});
-           console.log('Error in login: '+ error);
+           //console.log('Error in login: '+ error);
          }
         
       );
