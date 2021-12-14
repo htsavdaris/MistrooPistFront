@@ -6,6 +6,7 @@
     display :flex;
     flex-direction: column;
     align-items: flex-start;
+    min-height: 100vh
 }
 
 
@@ -16,6 +17,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    flex-grow: 0;
 }
 
 .govimage {
@@ -31,6 +33,7 @@
   width: 1240px;
   background-color: #003476;
   height: 60px;
+  flex-grow: 0;
 }
 
 h1, h2,h3 {
@@ -63,6 +66,20 @@ a[title]:hover::after {
     left: 0;
   }
 
+  .mainsection{
+    flex-grow: 1
+  }
+
   .bottomsection {
-    margin-bottom: auto;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px ;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #003476;
+    color: #e9e9e9;
+    width: 1240px;
+    flex-grow: 0;
   }
