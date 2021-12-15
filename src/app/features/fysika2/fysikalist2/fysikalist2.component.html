@@ -1,0 +1,72 @@
+<div class="list-edit-container">
+    <div class="tablecontainer">
+        <div>
+            <h2 style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #003476;">Κατάλογος Πιστοποιημένων
+                Εκτιμητών -
+                Φυσικών Προσώπων</h2>
+        </div>
+        <p-table #dt [value]="fysika" [rows]="10" [paginator]="true" [rowHover]="true" dataKey="fldam"
+            styleClass="p-datatable-sm"
+            currentPageReportTemplate="Εμφάνιση {first} έως {last} από {totalRecords} εγγραφές"
+            [showCurrentPageReport]="true">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    <!-- <h5 class="p-m-0">Manage Products</h5> -->
+                    <!-- <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+            </span> -->
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 4rem" pSortableColumn="fldam">AM<p-sortIcon field="fldam"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="fldeponymo">ΕΠΩΝΥΜΟ<p-sortIcon field="fldeponymo"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="fldonoma">ΟΝΟΜΑ<p-sortIcon field="fldonoma"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="fldpatronymo">ΠΑΤΡΩΝΥΜΟ<p-sortIcon field="fldpatronymo"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="flddiefthinsi">ΔΙΕΥΘΥΝΣΗ<p-sortIcon field="flddiefthinsi"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-fysiko let-expanded="expanded">
+                <tr styleClass="custorow">
+                    <td>{{fysiko.fldam}}</td>
+                    <td>{{fysiko.fldeponymo}}</td>
+                    <td>{{fysiko.fldonoma}}</td>
+                    <td>{{fysiko.fldpatronymo}}</td>
+                    <td>{{fysiko.flddiefthinsi}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="itemcontainer">
+        <form [formGroup]="itemForm" class="itemform">
+            <div class="p-field p-grid">
+                <label for="fldam" class="p-col" style="width:40%">Αρ. Μητρώου</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Αρ. Μητρώου" formControlName="fldam" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="fldeponymo" class="p-col" style="width:40%">Επώνυμο</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Επώνυμο" formControlName="fldeponymo" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div>
+            <div style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
+                <p-button label="Save" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="login()">
+                </p-button>
+                <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
+            </div>
+            <div>
+                <p-messages [(value)]="errormsg" [enableService]="false"></p-messages>
+            </div>
+        </form>
+    </div>
+</div>
