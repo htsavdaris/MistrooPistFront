@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FysikaService } from 'src/app/services/fysika.service';
-import {Fysiko } from 'src/app/models/fysiko';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Message } from 'primeng/api';
+import { FysikaService } from 'src/app/services/fysika.service';
+import { Fysiko } from 'src/app/models/fysiko';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from "rxjs";
 
@@ -29,13 +31,20 @@ export class Fysikalist2Component implements OnInit {
   valueB: boolean = false;
   valueC: boolean = false;
   valueD: boolean = false;
+  itemForm!: FormGroup ; 
+  selectedItem: Fysiko = new Fysiko();
+  errormsg: Message[] = [];
 
-
-  constructor(private fysikaService : FysikaService, public authService : AuthService) {
+  constructor(private fb:FormBuilder,private fysikaService : FysikaService, public authService : AuthService) {
     this.isLoggedIn = authService.isLoggedIn$();
   }
 
   ngOnInit(): void {
+    this.itemForm =  this.fb.group({
+      fldam :['', Validators.required ],
+      fldeponymo:['', [Validators.required, Validators.minLength(5)] ]
+    });
+
     this.fysikaService.getFysika().subscribe(
       (data) => {
         this.fysika = data;  
@@ -43,6 +52,10 @@ export class Fysikalist2Component implements OnInit {
       }
 
     );
+  }
+
+  save () {
+    return 0;
   }
 
 }

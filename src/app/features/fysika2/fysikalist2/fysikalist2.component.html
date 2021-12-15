@@ -5,7 +5,7 @@
                 Εκτιμητών -
                 Φυσικών Προσώπων</h2>
         </div>
-        <p-table #dt [value]="fysika" [rows]="10" [paginator]="true" [rowHover]="true" dataKey="fldam"
+        <p-table #dt [value]="fysika" [rows]="10" [paginator]="true" selectionMode="single" [(selection)]="selectedItem" dataKey="fldam"
             styleClass="p-datatable-sm"
             currentPageReportTemplate="Εμφάνιση {first} έως {last} από {totalRecords} εγγραφές"
             [showCurrentPageReport]="true">
@@ -18,8 +18,8 @@
             </span> -->
                 </div>
             </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
+            <ng-template pTemplate="header" >
+                <tr  >
                     <th style="width: 4rem" pSortableColumn="fldam">AM<p-sortIcon field="fldam"></p-sortIcon>
                     </th>
                     <th pSortableColumn="fldeponymo">ΕΠΩΝΥΜΟ<p-sortIcon field="fldeponymo"></p-sortIcon>
@@ -32,8 +32,8 @@
                     </th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-fysiko let-expanded="expanded">
-                <tr styleClass="custorow">
+            <ng-template pTemplate="body" let-fysiko>
+                <tr styleClass="custorow" [pSelectableRow]="fysiko">
                     <td>{{fysiko.fldam}}</td>
                     <td>{{fysiko.fldeponymo}}</td>
                     <td>{{fysiko.fldonoma}}</td>
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
-                <p-button label="Save" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="login()">
+                <p-button label="Save" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="save()">
                 </p-button>
                 <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
             </div>
