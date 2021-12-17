@@ -49,80 +49,85 @@
             <div class="p-field inline20">
                 <label for="fldam" class="p-col">Αρ.Μητρώου</label>
                 <div class="p-col">
-                    <input type="text" placeholder="" formControlName="fldam" pInputText
-                        style="margin-bottom: 5px;  width: 100%">
+                    <input type="text" placeholder="" formControlName="fldam" pInputText>
                 </div>
             </div>
             <div class="p-field inline50">
                 <label for="fldeponymo" class="p-col">Επώνυμο</label>
                 <div class="p-col">
-                    <input type="text" placeholder="Επώνυμο" formControlName="fldeponymo" pInputText
-                        style="margin-bottom: 5px; width: 100%">
+                    <input type="text" placeholder="Επώνυμο" formControlName="fldeponymo" pInputText>
                 </div>
             </div>
-            <!-- <div class="p-field">
-                <label for="fldonoma" class="p-col" style="width:40%">Όνομα</label>
-                <div class="p-col" style="width: 240px;">
-                    <input type="text" placeholder="Όνομα" formControlName="fldonoma" pInputText
-                        style="margin-bottom: 5px;">
+            <div class="p-field inline40">
+                <label for="fldonoma" class="p-col">Όνομα</label>
+                <div class="p-col">
+                    <input type="text" placeholder="Όνομα" formControlName="fldonoma" pInputText>
                 </div>
             </div>
-            <div class="p-field p-grid">
-                <label for="fldpatronymo" class="p-col" style="width:40%">Πατρώνυμο</label>
-                <div class="p-col" style="width: 240px;">
-                    <input type="text" placeholder="Πατρώνυμο" formControlName="fldpatronymo" pInputText
-                        style="margin-bottom: 5px;">
+            <div class="p-field inline40">
+                <label for="fldpatronymo" class="p-col">Πατρώνυμο</label>
+                <div class="p-col" >
+                    <input type="text" placeholder="Πατρώνυμο" formControlName="fldpatronymo" pInputText>
                 </div>
             </div>
-            <div class="p-field p-grid">
-                <label for="flddiefthinsi" class="p-col" style="width:40%">Διεύθυνση</label>
-                <div class="p-col" style="width: 240px;">
+            <div class="p-field inline80">
+                <label for="flddiefthinsi" class="p-col" >Διεύθυνση</label>
+                <div class="p-col">
                     <input type="text" placeholder="Διεύθυνση" formControlName="flddiefthinsi" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
-            <div class="p-field p-grid">
-                <label for="fldnomos" class="p-col" style="width:40%">Νόμος</label>
-                <div class="p-col" style="width: 240px;">
+            <div class="p-field inline80">
+                <label for="fldnomos" class="p-col" >Νόμος</label>
+                <div class="p-col">
                     <input type="text" placeholder="Νόμος" formControlName="fldnomos" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
-            <div class="p-field p-grid">
-                <label for="fldemail" class="p-col" style="width:40%">Νόμος</label>
-                <div class="p-col" style="width: 240px;">
+            <div class="p-field inline80">
+                <label for="fldemail" class="p-col">e-Mail</label>
+                <div class="p-col">
                     <input type="text" placeholder="Νόμος" formControlName="fldemail" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
-            <div class="p-field p-grid">
-                <label for="fldtilefono" class="p-col" style="width:40%">Νόμος</label>
-                <div class="p-col" style="width: 240px;">
+            <div class="p-field inline80">
+                <label for="fldtilefono" class="p-col" >Τηλέφωνο</label>
+                <div class="p-col">
                     <input type="text" placeholder="Νόμος" formControlName="fldtilefono" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
-            <div class="p-field p-grid">
-                <label for="fldcertification" class="p-col" style="width:40%">Νόμος</label>
-                <div class="p-col" style="width: 240px;">
+            <div class="p-field inline80">
+                <label for="fldcertification" class="p-col">Πιστοποίηση</label>
+                <div class="p-col">
                     <input type="text" placeholder="Νόμος" formControlName="fldcertification" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
-            <div class="p-field p-grid">
-                <label for="fldeidikotita" class="p-col" style="width:40%">Νόμος</label>
-                <div class="p-col" style="width: 240px;">
+            <div class="p-field inline80">
+                <label for="fldeidikotita" class="p-col">Ειδικότητα</label>
+                <div class="p-col">
                     <input type="text" placeholder="Νόμος" formControlName="fldeidikotita" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
-            <div class="p-field p-grid">
-                <label for="flda" class="p-col" style="width:40%">Νόμος</label>
-                <div class="p-col" style="width: 240px;">
-                    <input type="text" placeholder="Νόμος" formControlName="flda" pInputText
-                        style="margin-bottom: 5px;">
-                </div>
-            </div> -->
+            <div class="p-field inline20">
+                <label for="flda">A</label>
+                <p-checkbox formControlName="flda" [binary]="true"></p-checkbox>               
+            </div> 
+            <div class="p-field inline20">
+                <label for="fldb">B</label>
+                <p-checkbox formControlName="fldb" [binary]="true"></p-checkbox>               
+            </div> 
+            <div class="p-field inline20">
+                <label for="fldc">Γ</label>
+                <p-checkbox formControlName="fldc" [binary]="true"></p-checkbox>               
+            </div> 
+            <div class="p-field inline20">
+                <label for="fldd">Δ</label>
+                <p-checkbox formControlName="fldd" [binary]="true"></p-checkbox>               
+            </div> 
             <div style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
                 <p-button label="Edit" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="save()">
                 </p-button>
