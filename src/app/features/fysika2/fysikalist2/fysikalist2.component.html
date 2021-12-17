@@ -6,7 +6,7 @@
                 Φυσικών Προσώπων</h2>
         </div>
         <p-table #dt [value]="fysika" [rows]="10" [paginator]="true" selectionMode="single" [(selection)]="selectedItem" dataKey="fldam"
-            styleClass="p-datatable-sm"
+            styleClass="p-datatable-sm" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
             currentPageReportTemplate="Εμφάνιση {first} έως {last} από {totalRecords} εγγραφές"
             [showCurrentPageReport]="true">
             <ng-template pTemplate="caption">
@@ -43,30 +43,96 @@
             </ng-template>
         </p-table>
     </div>
-    <div class="itemcontainer">
-        <form [formGroup]="itemForm" class="itemform">
-            <div class="p-field p-grid">
-                <label for="fldam" class="p-col" style="width:40%">Αρ. Μητρώου</label>
-                <div class="p-col" style="width: 240px;">
-                    <input type="text" placeholder="Αρ. Μητρώου" formControlName="fldam" pInputText
-                        style="margin-bottom: 5px;">
+    <div>
+        <form [formGroup]="itemForm">
+            <div class="itemcontainer">
+            <div class="p-field inline20">
+                <label for="fldam" class="p-col">Αρ.Μητρώου</label>
+                <div class="p-col">
+                    <input type="text" placeholder="" formControlName="fldam" pInputText
+                        style="margin-bottom: 5px;  width: 100%">
                 </div>
             </div>
-            <div class="p-field p-grid">
-                <label for="fldeponymo" class="p-col" style="width:40%">Επώνυμο</label>
-                <div class="p-col" style="width: 240px;">
+            <div class="p-field inline50">
+                <label for="fldeponymo" class="p-col">Επώνυμο</label>
+                <div class="p-col">
                     <input type="text" placeholder="Επώνυμο" formControlName="fldeponymo" pInputText
+                        style="margin-bottom: 5px; width: 100%">
+                </div>
+            </div>
+            <!-- <div class="p-field">
+                <label for="fldonoma" class="p-col" style="width:40%">Όνομα</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Όνομα" formControlName="fldonoma" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
+            <div class="p-field p-grid">
+                <label for="fldpatronymo" class="p-col" style="width:40%">Πατρώνυμο</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Πατρώνυμο" formControlName="fldpatronymo" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="flddiefthinsi" class="p-col" style="width:40%">Διεύθυνση</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Διεύθυνση" formControlName="flddiefthinsi" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="fldnomos" class="p-col" style="width:40%">Νόμος</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Νόμος" formControlName="fldnomos" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="fldemail" class="p-col" style="width:40%">Νόμος</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Νόμος" formControlName="fldemail" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="fldtilefono" class="p-col" style="width:40%">Νόμος</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Νόμος" formControlName="fldtilefono" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="fldcertification" class="p-col" style="width:40%">Νόμος</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Νόμος" formControlName="fldcertification" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="fldeidikotita" class="p-col" style="width:40%">Νόμος</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Νόμος" formControlName="fldeidikotita" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div>
+            <div class="p-field p-grid">
+                <label for="flda" class="p-col" style="width:40%">Νόμος</label>
+                <div class="p-col" style="width: 240px;">
+                    <input type="text" placeholder="Νόμος" formControlName="flda" pInputText
+                        style="margin-bottom: 5px;">
+                </div>
+            </div> -->
             <div style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
-                <p-button label="Save" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="save()">
+                <p-button label="Edit" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="save()">
                 </p-button>
                 <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
             </div>
+            
             <div>
                 <p-messages [(value)]="errormsg" [enableService]="false"></p-messages>
             </div>
+        </div>
         </form>
     </div>
 </div>
