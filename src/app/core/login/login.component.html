@@ -3,9 +3,9 @@
     <img src="./../../../assets/minfin_logo.png" alt="Ministry of Finance" class="govimage">
     <h3>Σύστημα Πιστοποιημένων Εκτιμητών</h3>
   </div>
-  <div class="loginsection">
-    <form [formGroup]="loginForm" class="loginform">
-      <p-card header="Eίσοδος στο Σύστημα" class="loginheader">
+  <div class="loginsection" >
+    <form [formGroup]="loginForm" class="loginform" >
+      <h3 style="color: rgb(204, 201, 197);">Eίσοδος στο Σύστημα</h3>      
         <div class="p-field p-grid">
           <label for="login" class="p-col" style="width:40%">Login</label>
           <div class="p-col" style="width: 240px;">
@@ -24,8 +24,7 @@
         </div>
         <div>
           <p-messages [(value)]="errormsg" [enableService]="false"></p-messages>
-        </div>
-      </p-card>
+        </div>      
     </form>
   </div>
 </div>

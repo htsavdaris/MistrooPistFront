@@ -13,6 +13,7 @@
 
 .govgrheader {
     background-color: #ffffff;
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,7 +34,11 @@
 }
 
 .loginform{
-    width: 450px;    
+    width: 450px;   
+    border: 2px solid #082d5e;
+    background: #082d5e;
+    color: #082d5e;
+    border-radius: 7px;
 }
 
 .loginheader

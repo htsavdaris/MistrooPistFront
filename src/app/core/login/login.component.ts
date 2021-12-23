@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
          console.log(response);
           if (response.toString() == "Authenticated")
           {             
-            this.router.navigate(['/fysika']);
+            this.router.navigate(['/home']);
           }},
          (error) => {
            this.errormsg = [              

@@ -128,10 +128,10 @@
                 <label for="fldd">Δ</label>
                 <p-checkbox formControlName="fldd" [binary]="true"></p-checkbox>               
             </div> 
-            <div style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
-                <p-button label="Edit" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="save()">
-                </p-button>
-                <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
+            <div *ngIf="(isLoggedIn | async)" style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
+                <p-button label="Ενημέρωση" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="save()"></p-button>
+                <p-button label="Νέο" icon="pi pi-plus" [style]="{'margin-right': '1em'}" (onClick)="save()"></p-button>
+                <p-button label="Ακύρωση" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
             </div>
             
             <div>
