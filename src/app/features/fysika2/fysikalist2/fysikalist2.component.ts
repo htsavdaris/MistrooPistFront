@@ -51,7 +51,10 @@ export class Fysikalist2Component implements OnInit {
       fldtilefono: [''],
       fldcertification: [''],
       fldeidikotita: [''],
-      flda: ['']
+      flda: [''],
+      fldb: [''],
+      fldc: [''],
+      fldd: ['']
     });
 
     this.fysikaService.getFysika().subscribe(
@@ -77,13 +80,16 @@ export class Fysikalist2Component implements OnInit {
       fldtilefono: this.selectedItem.fldtilefono,
       fldcertification: this.selectedItem.fldcertification,
       fldeidikotita: this.selectedItem.fldeidikotita,
-      flda: this.selectedItem.flda
+      flda: this.selectedItem.flda,
+      fldb: this.selectedItem.fldb,
+      fldc: this.selectedItem.fldc,
+      fldd: this.selectedItem.fldd
 
     });
   }
 
   onRowUnselect(event: any) {
-    console.log(event.data.fldam);
+    //console.log(event.data.fldam);
 
     //this.messageService.add({severity:'info', summary:'Product Unselected',  detail: event.data.name});
   }
