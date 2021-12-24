@@ -94,7 +94,19 @@ export class Fysikalist2Component implements OnInit {
     //this.messageService.add({severity:'info', summary:'Product Unselected',  detail: event.data.name});
   }
 
-  save() {
+  savenew() {
+    return 0;
+  }
+
+  update() {
+    return 0;
+  }
+
+  clear() {
+    return 0;
+  }
+
+  cancel() {
     return 0;
   }
 

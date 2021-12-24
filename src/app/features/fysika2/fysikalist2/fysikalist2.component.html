@@ -130,8 +130,9 @@
             </div> 
             <div *ngIf="(isLoggedIn | async)" style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
                 <p-button label="Ενημέρωση" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="save()"></p-button>
-                <p-button label="Νέο" icon="pi pi-plus" [style]="{'margin-right': '1em'}" (onClick)="save()"></p-button>
-                <p-button label="Ακύρωση" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
+                <p-button label="Νέο" icon="pi pi-plus" [style]="{'margin-right': '1em'}" (onClick)="clear()"></p-button>
+                <p-button label="Αποθήκευση Νέου" icon="pi pi-plus" [style]="{'margin-right': '1em'}" (onClick)="savenew()"></p-button>
+                <p-button label="Ακύρωση" icon="pi pi-times" styleClass="p-button-secondary" (onClick)="cancel()"></p-button>
             </div>
             
             <div>
