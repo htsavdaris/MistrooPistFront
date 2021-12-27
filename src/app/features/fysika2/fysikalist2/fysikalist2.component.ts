@@ -6,16 +6,10 @@ import { Fysiko } from 'src/app/models/fysiko';
 import { AuthService } from 'src/app/services/auth.service';
 import { BehaviorSubject, Observable } from "rxjs";
 
-enum recordState {
-  undefined,
-  new,
-  edit,
-  delete
-};
 
-const DISPLAY:number = 1;
-const EMPTY_NEW:number = 2;
-const UPDATE:number = 3;
+const DISPLAY: number = 1;
+const EMPTY_NEW: number = 2;
+const UPDATE: number = 3;
 
 
 @Component({
@@ -27,22 +21,15 @@ export class Fysikalist2Component implements OnInit {
 
   fysika: Fysiko[] = [];
   fysiko: Fysiko = new Fysiko();
-  isLoggedIn!: Observable<boolean>;
-  itemDialogShow: boolean = false;
-  submitted: boolean = false;
-  rState: recordState = recordState.undefined;
-  AMdisabled: boolean = true;
-  valueA: boolean = false;
-  valueB: boolean = false;
-  valueC: boolean = false;
-  valueD: boolean = false;
+  isLoggedIn!: Observable<boolean>;  
+  submitted: boolean = false;    
   itemForm!: FormGroup;
   selectedItem: Fysiko = new Fysiko();
   errormsg: Message[] = []
-  formstate : BehaviorSubject<number> = new BehaviorSubject(DISPLAY);
+  formstate: BehaviorSubject<number> = new BehaviorSubject(DISPLAY);
   readonly MY_CONSTANT = 3;
 
-  
+
   constructor(private fb: FormBuilder, private fysikaService: FysikaService, public authService: AuthService) {
     this.isLoggedIn = authService.isLoggedIn$();
   }
@@ -64,19 +51,21 @@ export class Fysikalist2Component implements OnInit {
       fldc: [''],
       fldd: ['']
     });
+    
+    this.fetchtable();
+  }
 
+  fetchtable() {
     this.fysikaService.getFysika().subscribe(
       (data) => {
         this.fysika = data;
         //console.log(data);
       }
-
     );
   }
+
   onRowSelect(event: any) {
     this.selectedItem = event.data;
-    //console.log (event.data.fldam);
-    //console.log (this.selectedItem);
     this.itemForm.patchValue({
       fldam: this.selectedItem.fldam,
       fldeponymo: this.selectedItem.fldeponymo,
@@ -99,7 +88,6 @@ export class Fysikalist2Component implements OnInit {
 
   onRowUnselect(event: any) {
     //console.log(event.data.fldam);
-
     //this.messageService.add({severity:'info', summary:'Product Unselected',  detail: event.data.name});
   }
 
@@ -107,21 +95,84 @@ export class Fysikalist2Component implements OnInit {
     this.formstate.next(UPDATE);
     return 0;
   }
-  
+
 
   update() {
-    this.formstate.next(DISPLAY);
+    console.log('Call Update');
+    this.fysiko = { ...this.selectedItem };
+    this.fysiko.fldam = this.itemForm.get('fldam')?.value;
+    this.fysiko.fldonoma = this.itemForm.get('fldonoma')?.value;
+    this.fysiko.fldeponymo = this.itemForm.get('fldeponymo')?.value;
+    this.fysiko.fldpatronymo = this.itemForm.get('fldpatronymo')?.value;
+    this.fysiko.flddiefthinsi = this.itemForm.get('flddiefthinsi')?.value;
+    this.fysiko.fldnomos = this.itemForm.get('fldnomos')?.value;
+    this.fysiko.fldemail = this.itemForm.get('fldemail')?.value;
+    this.fysiko.fldtilefono = this.itemForm.get('fldtilefono')?.value;
+    this.fysiko.fldcertification = this.itemForm.get('fldcertification')?.value;
+    this.fysiko.flda = this.itemForm.get('flda')?.value;
+    this.fysiko.fldb = this.itemForm.get('fldb')?.value;
+    this.fysiko.fldc = this.itemForm.get('fldc')?.value;
+    this.fysiko.fldd = this.itemForm.get('fldd')?.value;
+    
+    this.fysikaService.updateFysiko(this.fysiko.fldam, this.fysiko).subscribe(
+      (data) => {
+        console.log('Call Update Subscribe');
+        this.fysiko = data;
+        console.log(data);
+        this.formstate.next(DISPLAY);
+        this.fetchtable();
+      });
     return 0;
   }
 
   clear() {
+    this.itemForm.patchValue({
+      fldam: '',
+      fldeponymo: '',
+      fldonoma: '',
+      fldpatronymo: '',
+      flddiefthinsi: '',
+      fldnomos: '',
+      fldemail: '',
+      fldtilefono: '',
+      fldcertification: '',
+      fldeidikotita: '',
+      flda: false,
+      fldb: false,
+      fldc: false,
+      fldd: false,
+    });
     this.formstate.next(EMPTY_NEW);
     return 0;
   }
 
-savenew() {
-    this.formstate.next(DISPLAY);
+  savenew() {
+    console.log('Call Insert');
+    this.fysiko.fldam = this.itemForm.get('fldam')?.value;
+    this.fysiko.fldonoma = this.itemForm.get('fldonoma')?.value;
+    this.fysiko.fldeponymo = this.itemForm.get('fldeponymo')?.value;
+    this.fysiko.fldpatronymo = this.itemForm.get('fldpatronymo')?.value;
+    this.fysiko.flddiefthinsi = this.itemForm.get('flddiefthinsi')?.value;
+    this.fysiko.fldnomos = this.itemForm.get('fldnomos')?.value;
+    this.fysiko.fldemail = this.itemForm.get('fldemail')?.value;
+    this.fysiko.fldtilefono = this.itemForm.get('fldtilefono')?.value;
+    this.fysiko.fldcertification = this.itemForm.get('fldcertification')?.value;
+    this.fysiko.flda = this.itemForm.get('flda')?.value;
+    this.fysiko.fldb = this.itemForm.get('fldb')?.value;
+    this.fysiko.fldc = this.itemForm.get('fldc')?.value;
+    this.fysiko.fldd = this.itemForm.get('fldd')?.value;
+    this.fysikaService.createFysiko(this.fysiko).subscribe(
+      (data) => {
+        console.log('Call Create');
+        this.fysiko = data;
+        console.log(data);
+        this.formstate.next(DISPLAY);
+        this.fetchtable();
+      });
+    return 0;
   }
+
+
   cancel() {
     this.formstate.next(DISPLAY);
   }
