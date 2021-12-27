@@ -4,7 +4,7 @@ import { Message } from 'primeng/api';
 import { FysikaService } from 'src/app/services/fysika.service';
 import { Fysiko } from 'src/app/models/fysiko';
 import { AuthService } from 'src/app/services/auth.service';
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 
 enum recordState {
   undefined,
@@ -12,6 +12,11 @@ enum recordState {
   edit,
   delete
 };
+
+const DISPLAY:number = 1;
+const EMPTY_NEW:number = 2;
+const UPDATE:number = 3;
+
 
 @Component({
   selector: 'app-fysikalist2',
@@ -33,8 +38,11 @@ export class Fysikalist2Component implements OnInit {
   valueD: boolean = false;
   itemForm!: FormGroup;
   selectedItem: Fysiko = new Fysiko();
-  errormsg: Message[] = [];
+  errormsg: Message[] = []
+  formstate : BehaviorSubject<number> = new BehaviorSubject(DISPLAY);
+  readonly MY_CONSTANT = 3;
 
+  
   constructor(private fb: FormBuilder, private fysikaService: FysikaService, public authService: AuthService) {
     this.isLoggedIn = authService.isLoggedIn$();
   }
@@ -44,11 +52,11 @@ export class Fysikalist2Component implements OnInit {
       fldam: ['', Validators.required],
       fldeponymo: ['', Validators.required],
       fldonoma: ['', Validators.required],
-      fldpatronymo: [''],
-      flddiefthinsi: [''],
-      fldnomos: [''],
-      fldemail: [''],
-      fldtilefono: [''],
+      fldpatronymo: ['', Validators.required],
+      flddiefthinsi: ['', Validators.required],
+      fldnomos: ['', Validators.required],
+      fldemail: ['', Validators.required],
+      fldtilefono: ['', Validators.required],
       fldcertification: [''],
       fldeidikotita: [''],
       flda: [''],
@@ -86,6 +94,7 @@ export class Fysikalist2Component implements OnInit {
       fldd: this.selectedItem.fldd
 
     });
+    this.formstate.next(DISPLAY);
   }
 
   onRowUnselect(event: any) {
@@ -94,20 +103,27 @@ export class Fysikalist2Component implements OnInit {
     //this.messageService.add({severity:'info', summary:'Product Unselected',  detail: event.data.name});
   }
 
-  savenew() {
+  readytoupdate() {
+    this.formstate.next(UPDATE);
     return 0;
   }
+  
 
   update() {
+    this.formstate.next(DISPLAY);
     return 0;
   }
 
   clear() {
+    this.formstate.next(EMPTY_NEW);
     return 0;
   }
 
+savenew() {
+    this.formstate.next(DISPLAY);
+  }
   cancel() {
-    return 0;
+    this.formstate.next(DISPLAY);
   }
 
 }
