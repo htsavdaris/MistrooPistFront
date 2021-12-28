@@ -28,7 +28,7 @@
                     </th>
                     <th pSortableColumn="fldpatronymo">ΠΑΤΡΩΝΥΜΟ<p-sortIcon field="fldpatronymo"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="flddiefthinsi">ΔΙΕΥΘΥΝΣΗ<p-sortIcon field="flddiefthinsi"></p-sortIcon>
+                    <th pSortableColumn="fldnomos">ΝΟΜΟΣ<p-sortIcon field="fldnomos"></p-sortIcon>
                     </th>
                 </tr>
             </ng-template>
@@ -38,7 +38,7 @@
                     <td>{{fysiko.fldeponymo}}</td>
                     <td>{{fysiko.fldonoma}}</td>
                     <td>{{fysiko.fldpatronymo}}</td>
-                    <td>{{fysiko.flddiefthinsi}}</td>
+                    <td>{{fysiko.fldnomos}}</td>
                 </tr>
             </ng-template>
         </p-table>
@@ -87,28 +87,28 @@
             <div class="p-field inline80">
                 <label for="fldemail" class="p-col">e-Mail</label>
                 <div class="p-col">
-                    <input [readonly]="(formstate | async)==1" type="text" placeholder="Νόμος" formControlName="fldemail" pInputText
+                    <input [readonly]="(formstate | async)==1" type="text" placeholder="e-Mail" formControlName="fldemail" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
             <div class="p-field inline80">
                 <label for="fldtilefono" class="p-col" >Τηλέφωνο</label>
                 <div class="p-col">
-                    <input [readonly]="(formstate | async)==1" type="text" placeholder="Νόμος" formControlName="fldtilefono" pInputText
+                    <input [readonly]="(formstate | async)==1" type="text" placeholder="Τηλέφωνο" formControlName="fldtilefono" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
             <div class="p-field inline80">
                 <label for="fldcertification" class="p-col">Πιστοποίηση</label>
                 <div class="p-col">
-                    <input [readonly]="(formstate | async)==1" type="text" placeholder="Νόμος" formControlName="fldcertification" pInputText
+                    <input [readonly]="(formstate | async)==1" type="text" placeholder="Πιστοποίηση" formControlName="fldcertification" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
             <div class="p-field inline80">
                 <label for="fldeidikotita" class="p-col">Ειδικότητα</label>
                 <div class="p-col">
-                    <input [readonly]="(formstate | async)==1" type="text" placeholder="Νόμος" formControlName="fldeidikotita" pInputText
+                    <input [readonly]="(formstate | async)==1" type="text" placeholder="Ειδικότητα" formControlName="fldeidikotita" pInputText
                         style="margin-bottom: 5px;">
                 </div>
             </div>
@@ -129,11 +129,12 @@
                 <p-checkbox [readonly]="(formstate | async)==1" formControlName="fldd" [binary]="true"></p-checkbox>               
             </div> 
             <div *ngIf="(isLoggedIn | async)" style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
-                <p-button *ngIf="(formstate | async)==1" label="Ενημέρωση" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="readytoupdate()"></p-button>
-                <p-button *ngIf="(formstate | async)==3" label="Αποθήκευση Ενημέρωσης" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="update()"></p-button>
-                <p-button *ngIf="(formstate | async)==1" label="Νέο" icon="pi pi-plus" [style]="{'margin-right': '1em'}" (onClick)="clear()"></p-button>
-                <p-button *ngIf="(formstate | async)==2" label="Αποθήκευση Νέου" icon="pi pi-plus" [style]="{'margin-right': '1em'}" (onClick)="savenew()"></p-button>
-                <p-button *ngIf="(formstate | async)!=1" label="Ακύρωση" icon="pi pi-times" styleClass="p-button-secondary" (onClick)="cancel()"></p-button>
+                <p-button *ngIf="(formstate | async)==1" label="Ενημέρωση" icon="pi pi-check" [style]="{'margin-right': '0.5em'}" (onClick)="readytoupdate()"></p-button>
+                <p-button *ngIf="(formstate | async)==3" label="Αποθήκευση Ενημέρωσης" icon="pi pi-check" [style]="{'margin-right': '0.5em'}" (onClick)="update()"></p-button>
+                <p-button *ngIf="(formstate | async)==1" label="Νέο" icon="pi pi-plus" [style]="{'margin-right': '0.5em'}" (onClick)="clear()"></p-button>
+                <p-button *ngIf="(formstate | async)==2" label="Αποθήκευση Νέου" icon="pi pi-plus" [style]="{'margin-right': '0.5em'}" (onClick)="savenew()"></p-button>
+                <p-button *ngIf="(formstate | async)==1" label="Διαγραφή" icon="pi pi-times-circle" styleClass="p-button-danger" [style]="{'margin-right': '0.5em'}" (onClick)="delete()"></p-button>
+                <p-button *ngIf="(formstate | async)!=1" label="Ακύρωση" icon="pi pi-undo" styleClass="p-button-secondary" (onClick)="cancel()"></p-button>
             </div>
             
             <div>

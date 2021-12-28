@@ -6,7 +6,7 @@ import { Fysiko } from 'src/app/models/fysiko';
 import { AuthService } from 'src/app/services/auth.service';
 import { BehaviorSubject, Observable } from "rxjs";
 
-
+const NO_STATE: number = 0;
 const DISPLAY: number = 1;
 const EMPTY_NEW: number = 2;
 const UPDATE: number = 3;
@@ -26,7 +26,7 @@ export class Fysikalist2Component implements OnInit {
   itemForm!: FormGroup;
   selectedItem: Fysiko = new Fysiko();
   errormsg: Message[] = []
-  formstate: BehaviorSubject<number> = new BehaviorSubject(DISPLAY);
+  formstate: BehaviorSubject<number> = new BehaviorSubject(NO_STATE);
   readonly MY_CONSTANT = 3;
 
 
@@ -97,8 +97,7 @@ export class Fysikalist2Component implements OnInit {
   }
 
 
-  update() {
-    console.log('Call Update');
+  update() {    
     this.fysiko = { ...this.selectedItem };
     this.fysiko.fldam = this.itemForm.get('fldam')?.value;
     this.fysiko.fldonoma = this.itemForm.get('fldonoma')?.value;
@@ -115,8 +114,7 @@ export class Fysikalist2Component implements OnInit {
     this.fysiko.fldd = this.itemForm.get('fldd')?.value;
     
     this.fysikaService.updateFysiko(this.fysiko.fldam, this.fysiko).subscribe(
-      (data) => {
-        console.log('Call Update Subscribe');
+      (data) => {        
         this.fysiko = data;
         console.log(data);
         this.formstate.next(DISPLAY);
@@ -172,6 +170,9 @@ export class Fysikalist2Component implements OnInit {
     return 0;
   }
 
+  delete (){
+    this.formstate.next(DISPLAY);
+  }
 
   cancel() {
     this.formstate.next(DISPLAY);
