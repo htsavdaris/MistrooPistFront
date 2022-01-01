@@ -5,7 +5,7 @@ import { Fysikalist2Component } from './fysikalist2/fysikalist2.component';
 import { NgprimeModule } from 'src/app/ngprime.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CheckboxModule} from 'primeng/checkbox';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import {CheckboxModule} from 'primeng/checkbox';
     FormsModule,
     CheckboxModule,
     ReactiveFormsModule,
+    ConfirmDialogModule,
     Fysika2RoutingModule
   ]
 })
