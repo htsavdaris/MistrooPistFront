@@ -181,6 +181,7 @@ export class Fysikalist2Component implements OnInit {
         console.log(data);
         this.formstate.next(DISPLAY);
         this.fetchtable();
+        this.clear();
       },
       (error) => {
         console.log(error);
