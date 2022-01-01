@@ -5,6 +5,7 @@ import { FysikaService } from 'src/app/services/fysika.service';
 import { Fysiko } from 'src/app/models/fysiko';
 import { AuthService } from 'src/app/services/auth.service';
 import { BehaviorSubject, Observable } from "rxjs";
+import { ConfirmationService } from 'primeng/api';
 
 const NO_STATE: number = 0;
 const DISPLAY: number = 1;
@@ -15,7 +16,8 @@ const UPDATE: number = 3;
 @Component({
   selector: 'app-fysikalist2',
   templateUrl: './fysikalist2.component.html',
-  styleUrls: ['./fysikalist2.component.scss']
+  styleUrls: ['./fysikalist2.component.scss'],
+  providers: [ConfirmationService]
 })
 export class Fysikalist2Component implements OnInit {
 
@@ -30,7 +32,7 @@ export class Fysikalist2Component implements OnInit {
   readonly MY_CONSTANT = 3;
 
 
-  constructor(private fb: FormBuilder, private fysikaService: FysikaService, public authService: AuthService) {
+  constructor(private fb: FormBuilder, private fysikaService: FysikaService, public authService: AuthService,private confirmationService: ConfirmationService) {
     this.isLoggedIn = authService.isLoggedIn$();
   }
 
@@ -44,8 +46,8 @@ export class Fysikalist2Component implements OnInit {
       fldnomos: ['', Validators.required],
       fldemail: ['', Validators.required],
       fldtilefono: ['', Validators.required],
-      fldcertification: [''],
-      fldeidikotita: [''],
+      fldcertification: ['', Validators.required],
+      fldeidikotita: ['', Validators.required],
       flda: [''],
       fldb: [''],
       fldc: [''],
@@ -87,8 +89,7 @@ export class Fysikalist2Component implements OnInit {
   }
 
   onRowUnselect(event: any) {
-    //console.log(event.data.fldam);
-    //this.messageService.add({severity:'info', summary:'Product Unselected',  detail: event.data.name});
+    
   }
 
   readytoupdate() {
@@ -115,8 +116,7 @@ export class Fysikalist2Component implements OnInit {
     
     this.fysikaService.updateFysiko(this.fysiko.fldam, this.fysiko).subscribe(
       (data) => {        
-        this.fysiko = data;
-        console.log(data);
+        this.fysiko = data;        
         this.formstate.next(DISPLAY);
         this.fetchtable();
       });
@@ -161,24 +161,31 @@ export class Fysikalist2Component implements OnInit {
     this.fysiko.fldd = this.itemForm.get('fldd')?.value;
     this.fysikaService.createFysiko(this.fysiko).subscribe(
       (data) => {
-        console.log('Call Create');
         this.fysiko = data;
-        console.log(data);
         this.formstate.next(DISPLAY);
         this.fetchtable();
       });
     return 0;
   }
 
-  delete (){
-    console.log('delete called 1');
+  delete() {
+    this.confirmationService.confirm({
+      message: 'Επιθυμείτε να διαγράψε την την εγγραφή?',
+      header: 'Επιβεβαίωση Διαγραφής',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+          this.deleteaction();
+      },
+      reject: () => {
+          
+      }
+  });
+  }
+
+  deleteaction (){
     this.fysiko.fldam = this.itemForm.get('fldam')?.value;
-    console.log("ID = " + this.fysiko.fldam);
     this.fysikaService.deleteFysiko(this.fysiko.fldam).subscribe(
       (data) => {
-        console.log('Call Delete');
-        //this.fysiko = null;
-        console.log(data);
         this.formstate.next(DISPLAY);
         this.fetchtable();
         this.clear();

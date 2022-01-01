@@ -5,6 +5,8 @@ import { Toolbar } from 'primeng/toolbar';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from "rxjs";
 
+
+
 enum recordState  {
   undefined,
   new,
@@ -39,7 +41,6 @@ export class FysikalistComponent implements OnInit {
     this.fysikaService.getFysika().subscribe(
       (data) => {
         this.fysika = data;  
-        //console.log(data);
       }
 
     );
