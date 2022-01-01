@@ -171,6 +171,20 @@ export class Fysikalist2Component implements OnInit {
   }
 
   delete (){
+    console.log('delete called 1');
+    this.fysiko.fldam = this.itemForm.get('fldam')?.value;
+    console.log("ID = " + this.fysiko.fldam);
+    this.fysikaService.deleteFysiko(this.fysiko.fldam).subscribe(
+      (data) => {
+        console.log('Call Delete');
+        //this.fysiko = null;
+        console.log(data);
+        this.formstate.next(DISPLAY);
+        this.fetchtable();
+      },
+      (error) => {
+        console.log(error);
+      });
     this.formstate.next(DISPLAY);
   }
 
