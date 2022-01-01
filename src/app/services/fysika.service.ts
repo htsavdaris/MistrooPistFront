@@ -59,6 +59,7 @@ export class FysikaService {
   }
 
   deleteFysiko(fysikoid: number): Observable<Fysiko> {
+    console.log('delete called');
     return this.http.delete<Fysiko>(this.myAppUrl + this.myApiUrl + fysikoid)
       .pipe(
         retry(1),

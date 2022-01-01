@@ -31,8 +31,8 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:55878"],
-        disallowedRoutes: ["http://localhost:55878/api/user/authenticate","http://localhost:55878/api/user/register"],
+        allowedDomains: ["localhost:5000"],
+        disallowedRoutes: ["http://localhost:5000/api/user/authenticate","http://localhost:5000/api/user/register"],
       },
     }),
     //NgprimeModule
