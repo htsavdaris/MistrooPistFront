@@ -1,57 +1,194 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Message } from 'primeng/api';
 import { NomikaService } from 'src/app/services/nomika.service';
 import { Nomiko } from 'src/app/models/nomiko';
-import { Toolbar } from 'primeng/toolbar';
 import { AuthService } from 'src/app/services/auth.service';
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
+import { ConfirmationService } from 'primeng/api';
+import { Table } from 'primeng/table';
+
+const NO_STATE: number = 0;
+const DISPLAY: number = 1;
+const EMPTY_NEW: number = 2;
+const UPDATE: number = 3;
 
 @Component({
   selector: 'app-nomikalist',
   templateUrl: './nomikalist.component.html',
-  styleUrls: ['./nomikalist.component.scss']
+  styleUrls: ['./nomikalist.component.scss'],
+  providers: [ConfirmationService]
 })
+
 export class NomikalistComponent implements OnInit {
  
   nomika: Nomiko[] = [];
   nomiko: Nomiko = new Nomiko();
   isLoggedIn!: Observable<boolean>;
-  itemDialogShow: boolean = false;
-  submitted: boolean = false;
+  submitted: boolean = false;    
+  itemForm!: FormGroup;
+  selectedItem: Nomiko = new Nomiko();
+  errormsg: Message[] = []
+  formstate: BehaviorSubject<number> = new BehaviorSubject(NO_STATE);
 
-  constructor(private nomikaService : NomikaService,public authService : AuthService) {
+    
+  constructor(private fb: FormBuilder,private nomikaService : NomikaService,public authService : AuthService,private confirmationService: ConfirmationService) {
     this.isLoggedIn = authService.isLoggedIn$();
-
    }
 
   ngOnInit(): void {
+    this.itemForm = this.fb.group({
+      fldam: ['', Validators.required],
+      fldeponymia: ['', Validators.required],
+      fldypefthinos: ['', Validators.required],
+      flddiefthinsi: ['', Validators.required],
+      fldnomos: ['', Validators.required],
+      fldemail: ['', Validators.required],
+      fldtilefono: ['', Validators.required],
+      flda: [''],
+      fldb: [''],
+      fldc: [''],
+      fldd: ['']
+    });
+    
+    this.fetchtable();
+  }
+
+  fetchtable() {
     this.nomikaService.getNomika().subscribe(
       (data) => {
-        this.nomika = data;
+        this.nomika = data;        
       }
-    )
+    );
   }
 
-  createItem() {  
-    this.nomiko = new Nomiko();
-    this.submitted = false;
-    this.itemDialogShow = true; 
+  onRowSelect(event: any) {
+    this.selectedItem = event.data;
+    this.itemForm.patchValue({
+      fldam: this.selectedItem.fldam,
+      fldeponymia: this.selectedItem.fldeponymia,
+      fldypefthinos: this.selectedItem.fldypefthinos,
+      flddiefthinsi: this.selectedItem.flddiefthinsi,
+      fldnomos: this.selectedItem.fldnomos,
+      fldemail: this.selectedItem.fldemail,
+      fldtilefono: this.selectedItem.fldtilefono,
+      flda: this.selectedItem.flda,
+      fldb: this.selectedItem.fldb,
+      fldc: this.selectedItem.fldc,
+      fldd: this.selectedItem.fldd
+
+    });
+    this.formstate.next(DISPLAY);
   }
 
-  editItem(item: Nomiko) {
-    this.nomiko = {...item};
-    this.submitted = false;
-    this.itemDialogShow = true;
+  onRowUnselect(event: any) {
+    
   }
 
-  deleteItem(){
+  readytoupdate() {
+    this.formstate.next(UPDATE);
+    return 0;
+  }
+  
+  update() {    
+    this.nomiko = { ...this.selectedItem };
+    this.nomiko.fldam = this.itemForm.get('fldam')?.value;
+    this.nomiko.fldeponymia = this.itemForm.get('fldeponymia')?.value;
+    this.nomiko.fldypefthinos = this.itemForm.get('fldypefthinos')?.value;
+    this.nomiko.flddiefthinsi = this.itemForm.get('flddiefthinsi')?.value;
+    this.nomiko.fldnomos = this.itemForm.get('fldnomos')?.value;
+    this.nomiko.fldemail = this.itemForm.get('fldemail')?.value;
+    this.nomiko.fldtilefono = this.itemForm.get('fldtilefono')?.value;
+    this.nomiko.flda = this.itemForm.get('flda')?.value;
+    this.nomiko.fldb = this.itemForm.get('fldb')?.value;
+    this.nomiko.fldc = this.itemForm.get('fldc')?.value;
+    this.nomiko.fldd = this.itemForm.get('fldd')?.value;
+    
+    this.nomikaService.updateNomiko(this.nomiko.fldam, this.nomiko).subscribe(
+      (data) => {        
+        this.nomiko = data;        
+        this.formstate.next(DISPLAY);
+        this.fetchtable();
+      });
+    return 0;
   }
 
-  hideDialog() {    
+  clear() {
+    this.itemForm.patchValue({
+      fldam: '',
+      fldeponymia: '',
+      fldypefthinos: '',
+      flddiefthinsi: '',
+      fldnomos: '',
+      fldemail: '',
+      fldtilefono: '',
+      fldcertification: '',
+      fldeidikotita: '',
+      flda: false,
+      fldb: false,
+      fldc: false,
+      fldd: false,
+    });
+    this.formstate.next(EMPTY_NEW);
+    return 0;
   }
 
-  saveItem() {
-
+  savenew() {
+    
+    this.nomiko.fldam = this.itemForm.get('fldam')?.value;
+    this.nomiko.fldeponymia = this.itemForm.get('fldeponymia')?.value;
+    this.nomiko.fldypefthinos = this.itemForm.get('fldpatronymo')?.value;
+    this.nomiko.flddiefthinsi = this.itemForm.get('flddiefthinsi')?.value;
+    this.nomiko.fldnomos = this.itemForm.get('fldnomos')?.value;
+    this.nomiko.fldemail = this.itemForm.get('fldemail')?.value;
+    this.nomiko.fldtilefono = this.itemForm.get('fldtilefono')?.value;
+    this.nomiko.flda = this.itemForm.get('flda')?.value;
+    this.nomiko.fldb = this.itemForm.get('fldb')?.value;
+    this.nomiko.fldc = this.itemForm.get('fldc')?.value;
+    this.nomiko.fldd = this.itemForm.get('fldd')?.value;
+    this.nomikaService.cretateNomiko(this.nomiko).subscribe(
+      (data) => {
+        this.nomiko = data;
+        this.formstate.next(DISPLAY);
+        this.fetchtable();
+      });
+    return 0;
   }
 
+  delete() {
+    this.confirmationService.confirm({
+      message: 'Επιθυμείτε να διαγράψετε την εγγραφή?',
+      header: 'Επιβεβαίωση Διαγραφής',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+          this.deleteaction();
+      },
+      reject: () => {
+          
+      }
+  });
+  }
+
+  deleteaction (){
+    this.nomiko.fldam = this.itemForm.get('fldam')?.value;
+    this.nomikaService.deleteNomiko(this.nomiko.fldam).subscribe(
+      (data) => {
+        this.formstate.next(DISPLAY);
+        this.fetchtable();
+        this.clear();
+      },
+      (error) => {
+        console.log(error);
+      });
+    this.formstate.next(DISPLAY);
+  }
+
+  cancel() {
+    this.formstate.next(DISPLAY);
+  }
+
+  filter(table: Table, inputtext :any) {
+      table.filterGlobal(<HTMLInputElement>inputtext.value, 'contains');
+  }
 
 }

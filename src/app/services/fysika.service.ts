@@ -50,7 +50,6 @@ export class FysikaService {
   }
 
   updateFysiko(fysikoid: number, fysiko:Fysiko): Observable<Fysiko> {
-    console.log('update called');
     return this.http.put<Fysiko>(this.myAppUrl + this.myApiUrl + fysikoid, JSON.stringify(fysiko), this.httpOptions)
       .pipe(
         retry(1),

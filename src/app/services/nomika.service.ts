@@ -40,7 +40,8 @@ export class NomikaService {
   }
 
   cretateNomiko(nomiko:Nomiko): Observable<Nomiko> {
-    return this.http.post<Nomiko>(this.myAppUrl + this.myApiUrl, JSON.stringify(nomiko), this.httpOptions)      .pipe(
+    return this.http.post<Nomiko>(this.myAppUrl + this.myApiUrl, JSON.stringify(nomiko), this.httpOptions)      
+    .pipe(
         retry(1),
         catchError(this.errorHandler)
       );

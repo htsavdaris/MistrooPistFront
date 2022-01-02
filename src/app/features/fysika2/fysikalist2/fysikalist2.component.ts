@@ -6,12 +6,12 @@ import { Fysiko } from 'src/app/models/fysiko';
 import { AuthService } from 'src/app/services/auth.service';
 import { BehaviorSubject, Observable } from "rxjs";
 import { ConfirmationService } from 'primeng/api';
+import { Table } from 'primeng/table';
 
 const NO_STATE: number = 0;
 const DISPLAY: number = 1;
 const EMPTY_NEW: number = 2;
 const UPDATE: number = 3;
-
 
 @Component({
   selector: 'app-fysikalist2',
@@ -19,6 +19,7 @@ const UPDATE: number = 3;
   styleUrls: ['./fysikalist2.component.scss'],
   providers: [ConfirmationService]
 })
+
 export class Fysikalist2Component implements OnInit {
 
   fysika: Fysiko[] = [];
@@ -29,7 +30,6 @@ export class Fysikalist2Component implements OnInit {
   selectedItem: Fysiko = new Fysiko();
   errormsg: Message[] = []
   formstate: BehaviorSubject<number> = new BehaviorSubject(NO_STATE);
-  readonly MY_CONSTANT = 3;
 
 
   constructor(private fb: FormBuilder, private fysikaService: FysikaService, public authService: AuthService,private confirmationService: ConfirmationService) {
@@ -60,8 +60,7 @@ export class Fysikalist2Component implements OnInit {
   fetchtable() {
     this.fysikaService.getFysika().subscribe(
       (data) => {
-        this.fysika = data;
-        //console.log(data);
+        this.fysika = data;        
       }
     );
   }
@@ -145,7 +144,7 @@ export class Fysikalist2Component implements OnInit {
   }
 
   savenew() {
-    console.log('Call Insert');
+    
     this.fysiko.fldam = this.itemForm.get('fldam')?.value;
     this.fysiko.fldonoma = this.itemForm.get('fldonoma')?.value;
     this.fysiko.fldeponymo = this.itemForm.get('fldeponymo')?.value;
@@ -170,7 +169,7 @@ export class Fysikalist2Component implements OnInit {
 
   delete() {
     this.confirmationService.confirm({
-      message: 'Επιθυμείτε να διαγράψε την την εγγραφή?',
+      message: 'Επιθυμείτε να διαγράψετε την εγγραφή?',
       header: 'Επιβεβαίωση Διαγραφής',
       icon: 'pi pi-info-circle',
       accept: () => {
@@ -198,6 +197,10 @@ export class Fysikalist2Component implements OnInit {
 
   cancel() {
     this.formstate.next(DISPLAY);
+  }
+
+  filter(table: Table, inputtext :any) {
+      table.filterGlobal(<HTMLInputElement>inputtext.value, 'contains');
   }
 
 }

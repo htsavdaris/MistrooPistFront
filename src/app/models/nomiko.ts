@@ -1,13 +1,13 @@
 export class Nomiko {
-    public fldAM: number = 0; 
-    public fldEponymia: string = "";
-    public fldYpefthinos: string = "";
-    public fldDieythynsi: string = "";
-    public fldNomos: string = "";
-    public fldTilefono: string = "";
-    public fldEmail: string = "";
-    public fldA: boolean = false;
-    public fldB: boolean = false;
-    public fldC: boolean = false;
-    public fldD: boolean = false;
+    public fldam: number = 0; 
+    public fldeponymia: string = "";
+    public fldypefthinos: string = "";
+    public flddiefthinsi: string = "";
+    public fldnomos: string = "";
+    public fldtilefono: string = "";
+    public fldemail: string = "";
+    public flda: boolean = false;
+    public fldb: boolean = false;
+    public fldc: boolean = false;
+    public fldd: boolean = false;
 }

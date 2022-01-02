@@ -1,85 +1,136 @@
-<div>
-    <h3>Κατάλογος Πιστοποιημένων Εκτιμητών - Νομικών Προσώπων</h3>
-</div>
-<div class="card">
-    <p-toolbar styleClass="p-mb-4">
-        <ng-template pTemplate="left">
-            <button pButton pRipple label="Νέα Εγγραφή" icon="pi pi-plus" class="p-button-success p-mr-2"></button>            
-        </ng-template>
-        <ng-template pTemplate="right">            
-            <button pButton pRipple label="Εξαγωγή" icon="pi pi-upload" class="p-button-help"></button>
-        </ng-template>
-    </p-toolbar>
-
-    <p-table #dt [value]="nomika" [rows]="10" [paginator]="true" [rowHover]="true" dataKey="fldAM"
-        currentPageReportTemplate="Εμφάνιση {first} έως {last} από {totalRecords} εγγραφές" [showCurrentPageReport]="true">
-        <ng-template pTemplate="caption">
-            <div class="p-d-flex p-ai-center p-jc-between">
-                <!-- <h5 class="p-m-0">Manage Products</h5> -->
-                <!-- <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
-                </span> -->
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width: 3rem"></th>
-                <th pSortableColumn="fldAM">AM<p-sortIcon field="fldAM"></p-sortIcon></th>
-                <th pSortableColumn="fldEponymia">ΕΠΩΝΥΜΟ<p-sortIcon field="fldEponymia"></p-sortIcon></th>
-                <th pSortableColumn="fldYpefthinos">ΟΝΟΜΑ<p-sortIcon field="fldYpefthinos"></p-sortIcon></th>
-                <th pSortableColumn="fldDieythynsi">ΠΑΤΡΩΝΥΜΟ<p-sortIcon field="fldDieythynsi"></p-sortIcon></th>
-                <th pSortableColumn="fldNomos">ΔΙΕΥΘΥΝΣΗ<p-sortIcon field="fldNomos"></p-sortIcon></th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-nomiko let-expanded="expanded">
-            <tr>
-                <td>
-                    <button type="button" pButton pRipple [pRowToggler]="nomiko" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-minus-circle' : 'pi pi-plus-circle'"></button>
-                </td>
-                <td>{{nomiko.fldAM}}</td>
-                <td>{{nomiko.fldEponymia}}</td>
-                <td>{{nomiko.fldYpefthinos}}</td>
-                <td>{{nomiko.fldDieythynsi}}</td>
-                <td>{{nomiko.fldNomos}}</td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="rowexpansion" let-nomiko >
-            <tr>
-                <td colspan="4" style="padding-top: 0px;"> 
-                    <div class="p-grid -fluid" style="font-size:14px;padding:10px">                        
-                        <div class="p-col-12 p-md-9">
-                            <div class="p-grid">
-                                <div class="p-col-12">
-                                    <b>AM:</b> {{nomiko.fldAM}}
-                                </div>
-                                <div class="p-col-12">
-                                    <b>ΕΠΩΝΥΜΟ:</b> {{nomiko.fldEponymia}}
-                                </div>
-                                <div class="p-col-12">
-                                    <b>ΟΝΟΜΑ:</b> {{nomiko.fldYpefthinos}}
-                                </div>
-                                <div class="p-col-12">
-                                    <b>ΠΑΤΡΩΝΥΜΟ:</b> {{nomiko.fldPatronymo}}
-                                </div>
-                                <div class="p-col-12">
-                                    <b>ΔΙΕΥΘΥΝΣΗ:</b> {{nomiko.fldDieythynsi}}
-                                </div>
-                                <div class="p-col-12">
-                                    <b>ΝΟΜΟΣ:</b> {{nomiko.fldNomos}}
-                                </div>
-                                <div class="p-col-12">
-                                    <b>eMail:</b> {{nomiko.fldTilefono}}
-                                </div>
-                                <div class="p-col-12">
-                                    <b>ΤΗΛ:</b> {{nomiko.fldEmail}}
-                                </div>
-                            </div>
-                        </div>
+<div class="list-edit-container">
+    <div class="tablecontainer">
+        <div>
+            <h2 style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #003476;">Κατάλογος Πιστοποιημένων
+                Εκτιμητών -
+                Νομικών Προσώπων</h2>
+        </div>
+        <p-table #dt [value]="fysika" [rows]="10" [paginator]="true" selectionMode="single" [(selection)]="selectedItem"
+            dataKey="fldam" styleClass="p-datatable-sm" (onRowSelect)="onRowSelect($event)"
+            (onRowUnselect)="onRowUnselect($event)"
+            currentPageReportTemplate="Εμφάνιση {first} έως {last} από {totalRecords} εγγραφές"
+            [showCurrentPageReport]="true"
+            [globalFilterFields]="['fldam','fldeponymia','fldypefthinos','fldnomos']">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" placeholder="Αναζήτηση..."
+                        (input)="filter(dt,$event.target)" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 4rem" pSortableColumn="fldam">AM<p-sortIcon field="fldam"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="fldeponymia">ΕΠΩΝΥΜΙΑ<p-sortIcon field="fldEponymia"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="fldypefthinos">ΑΡΜΟΔΙΟΣ ΕΚΤΙΜΗΣΕΩΝ<p-sortIcon field="fldypefthinos"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="fldnomos">ΝΟΜΟΣ<p-sortIcon field="fldnomos"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-nomiko>
+                <tr styleClass="custorow" [pSelectableRow]="nomiko">
+                    <td>{{nomiko.fldam}}</td>
+                    <td>{{nomiko.fldeponymia}}</td>
+                    <td>{{nomiko.fldypefthinos}}</td>
+                    <td>{{nomiko.fldnomos}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div>
+        <form [formGroup]="itemForm">
+            <div class="itemcontainer">
+                <div class="p-field inline20">
+                    <label for="fldam" class="p-col">Αρ.Μητρώου</label>
+                    <div class="p-col">
+                        <input [readonly]="(formstate | async)==1" type="text" placeholder="" formControlName="fldam"
+                            pInputText>
                     </div>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
+                </div>
+                <div class="p-field inline50">
+                    <label for="fldeponymia" class="p-col">Επωνυμία</label>
+                    <div class="p-col">
+                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Επωνυμία"
+                            formControlName="fldeponymia" pInputText>
+                    </div>
+                </div>
+                <div class="p-field inline40">
+                    <label for="fldypefthinos" class="p-col">Αρμόδιος Εκτιμήσεων</label>
+                    <div class="p-col">
+                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Αρμόδιος Εκτιμήσεων"
+                            formControlName="fldypefthinos" pInputText>
+                    </div>
+                </div>
+                <div class="p-field inline40">
+                    <label for="flddiefthinsi" class="p-col">Διεύθυνση</label>
+                    <div class="p-col">
+                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Διεύθυνση"
+                            formControlName="flddiefthinsi" pInputText>
+                    </div>
+                </div>
+                <div class="p-field inline80">
+                    <label for="fldnomos" class="p-col">Νόμος</label>
+                    <div class="p-col">
+                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Νόμος"
+                            formControlName="fldnomos" pInputText style="margin-bottom: 5px;">
+                    </div>
+                </div>
+                <div class="p-field inline80">
+                    <label for="fldemail" class="p-col">e-Mail</label>
+                    <div class="p-col">
+                        <input [readonly]="(formstate | async)==1" type="text" placeholder="e-Mail"
+                            formControlName="fldemail" pInputText style="margin-bottom: 5px;">
+                    </div>
+                </div>
+                <div class="p-field inline80">
+                    <label for="fldtilefono" class="p-col">Τηλέφωνο</label>
+                    <div class="p-col">
+                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Τηλέφωνο"
+                            formControlName="fldtilefono" pInputText style="margin-bottom: 5px;">
+                    </div>
+                </div>
+                <div class="p-field inline20">
+                    <label for="flda">A</label>
+                    <p-checkbox [readonly]="(formstate | async)==1" formControlName="flda" [binary]="true"></p-checkbox>
+                </div>
+                <div class="p-field inline20">
+                    <label for="fldb">B</label>
+                    <p-checkbox [readonly]="(formstate | async)==1" formControlName="fldb" [binary]="true"></p-checkbox>
+                </div>
+                <div class="p-field inline20">
+                    <label for="fldc">Γ</label>
+                    <p-checkbox [readonly]="(formstate | async)==1" formControlName="fldc" [binary]="true"></p-checkbox>
+                </div>
+                <div class="p-field inline20">
+                    <label for="fldd">Δ</label>
+                    <p-checkbox [readonly]="(formstate | async)==1" formControlName="fldd" [binary]="true"></p-checkbox>
+                </div>
+                <div *ngIf="(isLoggedIn | async)" style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
+                    <p-button *ngIf="(formstate | async)==1" label="Ενημέρωση" icon="pi pi-check"
+                        [style]="{'margin-right': '0.5em'}" (onClick)="readytoupdate()"></p-button>
+                    <p-button *ngIf="(formstate | async)==3" label="Αποθήκευση Ενημέρωσης" icon="pi pi-check"
+                        [style]="{'margin-right': '0.5em'}" (onClick)="update()"></p-button>
+                    <p-button *ngIf="(formstate | async)==1" label="Νέο" icon="pi pi-plus"
+                        [style]="{'margin-right': '0.5em'}" (onClick)="clear()"></p-button>
+                    <p-button *ngIf="(formstate | async)==2" label="Αποθήκευση Νέου" icon="pi pi-plus"
+                        [style]="{'margin-right': '0.5em'}" (onClick)="savenew()"></p-button>
+                    <p-button *ngIf="(formstate | async)==1" label="Διαγραφή" icon="pi pi-times-circle"
+                        styleClass="p-button-danger" [style]="{'margin-right': '0.5em'}" (onClick)="delete()">
+                    </p-button>
+                    <p-button *ngIf="(formstate | async)!=1" label="Ακύρωση" icon="pi pi-undo"
+                        styleClass="p-button-secondary" (onClick)="cancel()"></p-button>
+                </div>
 
+                <div>
+                    <p-messages [(value)]="errormsg" [enableService]="false"></p-messages>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
