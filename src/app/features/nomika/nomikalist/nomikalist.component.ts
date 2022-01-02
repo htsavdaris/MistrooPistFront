@@ -137,7 +137,7 @@ export class NomikalistComponent implements OnInit {
     
     this.nomiko.fldam = this.itemForm.get('fldam')?.value;
     this.nomiko.fldeponymia = this.itemForm.get('fldeponymia')?.value;
-    this.nomiko.fldypefthinos = this.itemForm.get('fldpatronymo')?.value;
+    this.nomiko.fldypefthinos = this.itemForm.get('fldypefthinos')?.value;
     this.nomiko.flddiefthinsi = this.itemForm.get('flddiefthinsi')?.value;
     this.nomiko.fldnomos = this.itemForm.get('fldnomos')?.value;
     this.nomiko.fldemail = this.itemForm.get('fldemail')?.value;
