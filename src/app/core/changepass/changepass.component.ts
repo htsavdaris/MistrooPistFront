@@ -24,12 +24,14 @@ export class ChangepassComponent implements OnInit {
 
   ngOnInit(): void {
       this.changePassForm =  this.fb.group({
+      login :['', Validators.required],
       oldpass :['', Validators.required],
       newpass:['', [Validators.required, Validators.minLength(5)] ],
       newpass2:['', [Validators.required, Validators.minLength(5)] ]
     }, { validators: passwordsDoNotMatchValidator } );
     if (localStorage.getItem("username") !== null) {
         this.curuser = localStorage.getItem('currentUser')!;
+    //this.changePassForm.setvalue ( this.curuser)    ;
     } 
   }
 

@@ -9,7 +9,8 @@
         <div class="p-field p-grid">
           <label for="login" class="p-col" style="width:40%">Login</label>
           <div class="p-col" style="width: 240px;">
-            <input type="text" placeholder="Username" formControlName="login" [(ngModel)] = "curuser"  pInputText>
+            <input type="text" placeholder="Username" formControlName="login" pInputText>
+            {{ this.changePassForm.get('login')?.value }}
           </div>
         </div>
         <div class="p-field p-grid">
@@ -42,7 +43,7 @@
             </div>
           </div>
           <div style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
-            <p-button label="Chnage" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="changepass()">
+            <p-button label="Change" icon="pi pi-check" [style]="{'margin-right': '1em'}" (onClick)="changepass()">
             </p-button>
             <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"></p-button>
           </div>
