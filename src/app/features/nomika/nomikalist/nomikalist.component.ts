@@ -45,10 +45,10 @@ export class NomikalistComponent implements OnInit {
       fldnomos: ['', Validators.required],
       fldemail: ['', Validators.required],
       fldtilefono: ['', Validators.required],
-      flda: [''],
-      fldb: [''],
-      fldc: [''],
-      fldd: ['']
+      flda: [false],
+      fldb: [false],
+      fldc: [false],
+      fldd: [false]
     });
     
     this.fetchtable();
@@ -57,7 +57,8 @@ export class NomikalistComponent implements OnInit {
   fetchtable() {
     this.nomikaService.getNomika().subscribe(
       (data) => {
-        this.nomika = data;        
+        this.nomika = data;  
+        //console.log('data fetched');
       }
     );
   }
@@ -113,9 +114,9 @@ export class NomikalistComponent implements OnInit {
     return 0;
   }
 
-  clear() {
+  clearform() {
     this.itemForm.patchValue({
-      fldam: '',
+      fldam: 0,
       fldeponymia: '',
       fldypefthinos: '',
       flddiefthinsi: '',
@@ -129,12 +130,21 @@ export class NomikalistComponent implements OnInit {
       fldc: false,
       fldd: false,
     });
-    this.formstate.next(EMPTY_NEW);
     return 0;
   }
 
+  clearforadd() {
+      this.clearform();
+      this.formstate.next(EMPTY_NEW);
+  }
+
+  clearafterdelete(){
+    this.clearform();
+    this.formstate.next(NO_STATE);
+  }
+
   savenew() {
-    
+    this.nomiko = new Nomiko();
     this.nomiko.fldam = this.itemForm.get('fldam')?.value;
     this.nomiko.fldeponymia = this.itemForm.get('fldeponymia')?.value;
     this.nomiko.fldypefthinos = this.itemForm.get('fldypefthinos')?.value;
@@ -146,13 +156,22 @@ export class NomikalistComponent implements OnInit {
     this.nomiko.fldb = this.itemForm.get('fldb')?.value;
     this.nomiko.fldc = this.itemForm.get('fldc')?.value;
     this.nomiko.fldd = this.itemForm.get('fldd')?.value;
+
     this.nomikaService.cretateNomiko(this.nomiko).subscribe(
       (data) => {
         this.nomiko = data;
-        this.formstate.next(DISPLAY);
         this.fetchtable();
-      });
-    return 0;
+        this.formstate.next(DISPLAY);
+        return 0;    
+      },
+      (error) => {
+        console.log(error);
+      })
+      ;
+    //this.selectedItem = ({} as Nomiko);
+    //this.clear();
+    //this.fetchtable();
+    
   }
 
   delete() {
@@ -164,18 +183,17 @@ export class NomikalistComponent implements OnInit {
           this.deleteaction();
       },
       reject: () => {
-          
       }
   });
   }
 
   deleteaction (){
-    this.nomiko.fldam = this.itemForm.get('fldam')?.value;
-    this.nomikaService.deleteNomiko(this.nomiko.fldam).subscribe(
+    var fldam = this.itemForm.get('fldam')?.value;
+    this.nomikaService.deleteNomiko(fldam).subscribe(
       (data) => {
         this.formstate.next(DISPLAY);
         this.fetchtable();
-        this.clear();
+        this.clearafterdelete();
       },
       (error) => {
         console.log(error);

@@ -146,7 +146,7 @@
                     <p-button *ngIf="(formstate | async)==1" label="Διαγραφή" icon="pi pi-times-circle"
                         styleClass="p-button-danger" [style]="{'margin-right': '0.5em'}" (onClick)="delete()">
                     </p-button>
-                    <p-button *ngIf="(formstate | async)!=1" label="Ακύρωση" icon="pi pi-undo"
+                    <p-button *ngIf="(formstate | async)! >=2  " label="Ακύρωση" icon="pi pi-undo"
                         styleClass="p-button-secondary" (onClick)="cancel()"></p-button>
                 </div>
 

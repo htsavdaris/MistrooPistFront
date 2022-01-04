@@ -42,7 +42,7 @@ export class NomikaService {
   cretateNomiko(nomiko:Nomiko): Observable<Nomiko> {
     return this.http.post<Nomiko>(this.myAppUrl + this.myApiUrl, JSON.stringify(nomiko), this.httpOptions)      
     .pipe(
-        retry(1),
+        //retry(1),
         catchError(this.errorHandler)
       );
   }
@@ -50,7 +50,7 @@ export class NomikaService {
   updateNomiko(nomikoid: number, nomiko:Nomiko): Observable<Nomiko> {
     return this.http.put<Nomiko>(this.myAppUrl + this.myApiUrl + nomikoid, JSON.stringify(nomiko), this.httpOptions)
       .pipe(
-        retry(1),
+        //retry(1),
         catchError(this.errorHandler)
       );
   }

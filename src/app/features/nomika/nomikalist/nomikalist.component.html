@@ -48,81 +48,81 @@
                 <div class="p-field inline20">
                     <label for="fldam" class="p-col">Αρ.Μητρώου</label>
                     <div class="p-col">
-                        <input [readonly]="(formstate | async)==1" type="text" placeholder="" formControlName="fldam"
+                        <input [readonly]="(formstate | async)! <=1" type="text" placeholder="" formControlName="fldam"
                             pInputText>
                     </div>
                 </div>
                 <div class="p-field inline50">
                     <label for="fldeponymia" class="p-col">Επωνυμία</label>
                     <div class="p-col">
-                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Επωνυμία"
+                        <input [readonly]="(formstate | async)! <= 1" type="text" placeholder="Επωνυμία"
                             formControlName="fldeponymia" pInputText>
                     </div>
                 </div>
                 <div class="p-field inline80">
                     <label for="fldypefthinos" class="p-col">Αρμόδιος Εκτιμήσεων</label>
                     <div class="p-col">
-                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Αρμόδιος Εκτιμήσεων"
+                        <input [readonly]="(formstate | async)! <= 1" type="text" placeholder="Αρμόδιος Εκτιμήσεων"
                             formControlName="fldypefthinos" pInputText>
                     </div>
                 </div>
                 <div class="p-field inline80">
                     <label for="flddiefthinsi" class="p-col">Διεύθυνση</label>
                     <div class="p-col">
-                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Διεύθυνση"
+                        <input [readonly]="(formstate | async)! <= 1" type="text" placeholder="Διεύθυνση"
                             formControlName="flddiefthinsi" pInputText>
                     </div>
                 </div>
                 <div class="p-field inline80">
                     <label for="fldnomos" class="p-col">Νόμος</label>
                     <div class="p-col">
-                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Νόμος"
+                        <input [readonly]="(formstate | async)! <= 1" type="text" placeholder="Νόμος"
                             formControlName="fldnomos" pInputText style="margin-bottom: 5px;">
                     </div>
                 </div>
                 <div class="p-field inline80">
                     <label for="fldemail" class="p-col">e-Mail</label>
                     <div class="p-col">
-                        <input [readonly]="(formstate | async)==1" type="text" placeholder="e-Mail"
+                        <input [readonly]="(formstate | async)! <= 1" type="text" placeholder="e-Mail"
                             formControlName="fldemail" pInputText style="margin-bottom: 5px;">
                     </div>
                 </div>
                 <div class="p-field inline80">
                     <label for="fldtilefono" class="p-col">Τηλέφωνο</label>
                     <div class="p-col">
-                        <input [readonly]="(formstate | async)==1" type="text" placeholder="Τηλέφωνο"
+                        <input [readonly]="(formstate | async)! <= 1" type="text" placeholder="Τηλέφωνο"
                             formControlName="fldtilefono" pInputText style="margin-bottom: 5px;">
                     </div>
                 </div>
                 <div class="p-field inline20">
                     <label for="flda">A</label>
-                    <p-checkbox [readonly]="(formstate | async)==1" formControlName="flda" [binary]="true"></p-checkbox>
+                    <p-checkbox [readonly]="(formstate | async)! <= 1" formControlName="flda" [binary]="true"></p-checkbox>
                 </div>
                 <div class="p-field inline20">
                     <label for="fldb">B</label>
-                    <p-checkbox [readonly]="(formstate | async)==1" formControlName="fldb" [binary]="true"></p-checkbox>
+                    <p-checkbox [readonly]="(formstate | async)! <= 1" formControlName="fldb" [binary]="true"></p-checkbox>
                 </div>
                 <div class="p-field inline20">
                     <label for="fldc">Γ</label>
-                    <p-checkbox [readonly]="(formstate | async)==1" formControlName="fldc" [binary]="true"></p-checkbox>
+                    <p-checkbox [readonly]="(formstate | async)! <= 1" formControlName="fldc" [binary]="true"></p-checkbox>
                 </div>
                 <div class="p-field inline20">
                     <label for="fldd">Δ</label>
-                    <p-checkbox [readonly]="(formstate | async)==1" formControlName="fldd" [binary]="true"></p-checkbox>
+                    <p-checkbox [readonly]="(formstate | async)! <= 1" formControlName="fldd" [binary]="true"></p-checkbox>
                 </div>
                 <div *ngIf="(isLoggedIn | async)" style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
+                    <p-button *ngIf="(formstate | async)==0 || (formstate | async)==1 " label="Νέο" icon="pi pi-plus"
+                        [style]="{'margin-right': '0.5em'}" (onClick)="clearforadd()"></p-button>
+                    <p-button *ngIf="(formstate | async)==2" label="Αποθήκευση Νέου" icon="pi pi-plus"
+                        [style]="{'margin-right': '0.5em'}" (onClick)="savenew()"></p-button>
                     <p-button *ngIf="(formstate | async)==1" label="Ενημέρωση" icon="pi pi-check"
                         [style]="{'margin-right': '0.5em'}" (onClick)="readytoupdate()"></p-button>
                     <p-button *ngIf="(formstate | async)==3" label="Αποθήκευση Ενημέρωσης" icon="pi pi-check"
                         [style]="{'margin-right': '0.5em'}" (onClick)="update()"></p-button>
-                    <p-button *ngIf="(formstate | async)==1" label="Νέο" icon="pi pi-plus"
-                        [style]="{'margin-right': '0.5em'}" (onClick)="clear()"></p-button>
-                    <p-button *ngIf="(formstate | async)==2" label="Αποθήκευση Νέου" icon="pi pi-plus"
-                        [style]="{'margin-right': '0.5em'}" (onClick)="savenew()"></p-button>
                     <p-button *ngIf="(formstate | async)==1" label="Διαγραφή" icon="pi pi-times-circle"
                         styleClass="p-button-danger" [style]="{'margin-right': '0.5em'}" (onClick)="delete()">
                     </p-button>
-                    <p-button *ngIf="(formstate | async)!=1" label="Ακύρωση" icon="pi pi-undo"
+                    <p-button *ngIf="(formstate | async)! >= 2" label="Ακύρωση" icon="pi pi-undo"
                         styleClass="p-button-secondary" (onClick)="cancel()"></p-button>
                 </div>
 

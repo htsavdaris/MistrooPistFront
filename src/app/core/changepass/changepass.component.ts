@@ -31,7 +31,7 @@ export class ChangepassComponent implements OnInit {
     }, { validators: passwordsDoNotMatchValidator } );
     if (localStorage.getItem("username") !== null) {
         this.curuser = localStorage.getItem('currentUser')!;
-    //this.changePassForm.setvalue ( this.curuser)    ;
+        this.changePassForm.get('login')?.setValue(this.curuser);
     } 
   }
 
