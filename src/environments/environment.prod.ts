@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost/pisto/'
+  baseUrl: 'http://13.78.210.118/pisto/'
 };
