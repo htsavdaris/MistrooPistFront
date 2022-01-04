@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://13.78.210.118/pisto/'
+  baseUrl: 'http://pistopoiites.westcentralus.cloudapp.azure.com/pisto/'
 };
