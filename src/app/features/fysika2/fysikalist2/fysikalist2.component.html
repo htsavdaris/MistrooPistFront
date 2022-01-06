@@ -135,18 +135,18 @@
                     <p-checkbox [readonly]="(formstate | async)==1" formControlName="fldd" [binary]="true"></p-checkbox>
                 </div>
                 <div *ngIf="(isLoggedIn | async)" style="margin-bottom: 1em;margin-top: 20px; border-style: none; ">
+                    <p-button *ngIf="(formstate | async)==0 || (formstate | async)==1 " label="Νέο" icon="pi pi-plus"
+                        [style]="{'margin-right': '0.5em'}" (onClick)="clearforadd()"></p-button>
+                    <p-button *ngIf="(formstate | async)==2" label="Αποθήκευση Νέου" icon="pi pi-plus"
+                        [style]="{'margin-right': '0.5em'}" (onClick)="savenew()"></p-button>
                     <p-button *ngIf="(formstate | async)==1" label="Ενημέρωση" icon="pi pi-check"
                         [style]="{'margin-right': '0.5em'}" (onClick)="readytoupdate()"></p-button>
                     <p-button *ngIf="(formstate | async)==3" label="Αποθήκευση Ενημέρωσης" icon="pi pi-check"
                         [style]="{'margin-right': '0.5em'}" (onClick)="update()"></p-button>
-                    <p-button *ngIf="(formstate | async)==1" label="Νέο" icon="pi pi-plus"
-                        [style]="{'margin-right': '0.5em'}" (onClick)="clear()"></p-button>
-                    <p-button *ngIf="(formstate | async)==2" label="Αποθήκευση Νέου" icon="pi pi-plus"
-                        [style]="{'margin-right': '0.5em'}" (onClick)="savenew()"></p-button>
                     <p-button *ngIf="(formstate | async)==1" label="Διαγραφή" icon="pi pi-times-circle"
                         styleClass="p-button-danger" [style]="{'margin-right': '0.5em'}" (onClick)="delete()">
                     </p-button>
-                    <p-button *ngIf="(formstate | async)! >=2  " label="Ακύρωση" icon="pi pi-undo"
+                    <p-button *ngIf="(formstate | async)! >= 2" label="Ακύρωση" icon="pi pi-undo"
                         styleClass="p-button-secondary" (onClick)="cancel()"></p-button>
                 </div>
 

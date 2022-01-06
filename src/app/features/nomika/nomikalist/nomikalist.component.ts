@@ -55,10 +55,9 @@ export class NomikalistComponent implements OnInit {
   }
 
   fetchtable() {
-    this.nomikaService.getNomika().subscribe(
+    this.nomikaService.getAll().subscribe(
       (data) => {
         this.nomika = data;  
-        //console.log('data fetched');
       }
     );
   }
@@ -105,7 +104,7 @@ export class NomikalistComponent implements OnInit {
     this.nomiko.fldc = this.itemForm.get('fldc')?.value;
     this.nomiko.fldd = this.itemForm.get('fldd')?.value;
     
-    this.nomikaService.updateNomiko(this.nomiko.fldam, this.nomiko).subscribe(
+    this.nomikaService.update(this.nomiko.fldam, this.nomiko).subscribe(
       (data) => {        
         this.nomiko = data;        
         this.formstate.next(DISPLAY);
@@ -157,7 +156,7 @@ export class NomikalistComponent implements OnInit {
     this.nomiko.fldc = this.itemForm.get('fldc')?.value;
     this.nomiko.fldd = this.itemForm.get('fldd')?.value;
 
-    this.nomikaService.cretateNomiko(this.nomiko).subscribe(
+    this.nomikaService.save(this.nomiko).subscribe(
       (data) => {
         this.nomiko = data;
         this.fetchtable();
@@ -168,10 +167,7 @@ export class NomikalistComponent implements OnInit {
         console.log(error);
       })
       ;
-    //this.selectedItem = ({} as Nomiko);
-    //this.clear();
-    //this.fetchtable();
-    
+
   }
 
   delete() {
@@ -189,7 +185,7 @@ export class NomikalistComponent implements OnInit {
 
   deleteaction (){
     var fldam = this.itemForm.get('fldam')?.value;
-    this.nomikaService.deleteNomiko(fldam).subscribe(
+    this.nomikaService.delete(fldam).subscribe(
       (data) => {
         this.formstate.next(DISPLAY);
         this.fetchtable();

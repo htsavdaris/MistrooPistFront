@@ -58,7 +58,7 @@ export class Fysikalist2Component implements OnInit {
   }
 
   fetchtable() {
-    this.fysikaService.getFysika().subscribe(
+    this.fysikaService.getAll().subscribe(
       (data) => {
         this.fysika = data;        
       }
@@ -113,7 +113,7 @@ export class Fysikalist2Component implements OnInit {
     this.fysiko.fldc = this.itemForm.get('fldc')?.value;
     this.fysiko.fldd = this.itemForm.get('fldd')?.value;
     
-    this.fysikaService.updateFysiko(this.fysiko.fldam, this.fysiko).subscribe(
+    this.fysikaService.update(this.fysiko.fldam, this.fysiko).subscribe(
       (data) => {        
         this.fysiko = data;        
         this.formstate.next(DISPLAY);
@@ -122,7 +122,7 @@ export class Fysikalist2Component implements OnInit {
     return 0;
   }
 
-  clear() {
+  clearform() {
     this.itemForm.patchValue({
       fldam: '',
       fldeponymo: '',
@@ -139,9 +139,18 @@ export class Fysikalist2Component implements OnInit {
       fldc: false,
       fldd: false,
     });
-    this.formstate.next(EMPTY_NEW);
     return 0;
   }
+
+  clearforadd() {
+    this.clearform();
+    this.formstate.next(EMPTY_NEW);
+}
+
+clearafterdelete(){
+  this.clearform();
+  this.formstate.next(NO_STATE);
+}
 
   savenew() {
     
@@ -158,11 +167,14 @@ export class Fysikalist2Component implements OnInit {
     this.fysiko.fldb = this.itemForm.get('fldb')?.value;
     this.fysiko.fldc = this.itemForm.get('fldc')?.value;
     this.fysiko.fldd = this.itemForm.get('fldd')?.value;
-    this.fysikaService.createFysiko(this.fysiko).subscribe(
+    this.fysikaService.save(this.fysiko).subscribe(
       (data) => {
         this.fysiko = data;
         this.formstate.next(DISPLAY);
         this.fetchtable();
+      },
+      (error) => {
+        console.log(error);
       });
     return 0;
   }
@@ -183,11 +195,11 @@ export class Fysikalist2Component implements OnInit {
 
   deleteaction (){
     this.fysiko.fldam = this.itemForm.get('fldam')?.value;
-    this.fysikaService.deleteFysiko(this.fysiko.fldam).subscribe(
+    this.fysikaService.delete(this.fysiko.fldam).subscribe(
       (data) => {
         this.formstate.next(DISPLAY);
         this.fetchtable();
-        this.clear();
+        this.clearafterdelete();
       },
       (error) => {
         console.log(error);

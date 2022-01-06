@@ -24,7 +24,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.baseUrl ;
-    this.myApiUrl = 'api/user/'; 
+    this.myApiUrl = '/api/user/'; 
    }
 
    isLoggedIn$(): Observable<boolean> {
