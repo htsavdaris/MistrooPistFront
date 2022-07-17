@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Message } from 'primeng/api';
 import { NomikaService } from 'src/app/services/nomika.service';
 import { Nomiko } from 'src/app/models/nomiko';
@@ -26,13 +26,13 @@ export class NomikalistComponent implements OnInit {
   nomiko: Nomiko = new Nomiko();
   isLoggedIn!: Observable<boolean>;
   submitted: boolean = false;    
-  itemForm!: FormGroup;
+  itemForm!: UntypedFormGroup;
   selectedItem: Nomiko = new Nomiko();
   errormsg: Message[] = []
   formstate: BehaviorSubject<number> = new BehaviorSubject(NO_STATE);
 
     
-  constructor(private fb: FormBuilder,private nomikaService : NomikaService,public authService : AuthService,private confirmationService: ConfirmationService) {
+  constructor(private fb: UntypedFormBuilder,private nomikaService : NomikaService,public authService : AuthService,private confirmationService: ConfirmationService) {
     this.isLoggedIn = authService.isLoggedIn$();
    }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Userauth } from 'src/app/models/userauth';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,10 +13,10 @@ import { } from 'primeng/api';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup ;  
+  loginForm!: UntypedFormGroup ;  
   errormsg: Message[] = [];
 
-  constructor(private fb:FormBuilder, private authService:AuthService,
+  constructor(private fb:UntypedFormBuilder, private authService:AuthService,
     private router :Router) { }
 
 

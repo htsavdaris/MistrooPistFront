@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Changepass } from 'src/app/models/changepass';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,11 +15,11 @@ import { } from 'primeng/api';
 })
 
 export class ChangepassComponent implements OnInit {
-  changePassForm!: FormGroup ;  
+  changePassForm!: UntypedFormGroup ;  
   errormsg: Message[] = [];
   curuser?: string ="";
 
-  constructor(private fb:FormBuilder, private authService:AuthService,
+  constructor(private fb:UntypedFormBuilder, private authService:AuthService,
     private router :Router) { }
 
   ngOnInit(): void {
