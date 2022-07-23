@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl,FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Changepass } from 'src/app/models/changepass';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,19 +15,19 @@ import { } from 'primeng/api';
 })
 
 export class ChangepassComponent implements OnInit {
-  changePassForm!: UntypedFormGroup ;  
+  changePassForm!: FormGroup ;  
   errormsg: Message[] = [];
   curuser?: string ="";
 
-  constructor(private fb:UntypedFormBuilder, private authService:AuthService,
+  constructor(private authService:AuthService,
     private router :Router) { }
 
   ngOnInit(): void {
-      this.changePassForm =  this.fb.group({
-      login :['', Validators.required],
-      oldpass :['', Validators.required],
-      newpass:['', [Validators.required, Validators.minLength(5)] ],
-      newpass2:['', [Validators.required, Validators.minLength(5)] ]
+      this.changePassForm =  new FormGroup({
+      login :new FormControl<string>('', Validators.required),
+      oldpass :new FormControl<string>('', Validators.required),
+      newpass:new FormControl<string>('', [Validators.required, Validators.minLength(5)] ),
+      newpass2:new FormControl<string>('', [Validators.required, Validators.minLength(5)] )
     }, { validators: passwordsDoNotMatchValidator } );
     if (localStorage.getItem("username") !== null) {
         this.curuser = localStorage.getItem('currentUser')!;

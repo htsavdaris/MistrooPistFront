@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Message } from 'primeng/api';
 import { FysikaService } from 'src/app/services/fysika.service';
 import { Fysiko } from 'src/app/models/fysiko';
@@ -26,32 +26,32 @@ export class Fysikalist2Component implements OnInit {
   fysiko: Fysiko = new Fysiko();
   isLoggedIn!: Observable<boolean>;  
   submitted: boolean = false;    
-  itemForm!: UntypedFormGroup;
+  itemForm!: FormGroup;
   selectedItem: Fysiko = new Fysiko();
   errormsg: Message[] = []
   formstate: BehaviorSubject<number> = new BehaviorSubject(NO_STATE);
 
 
-  constructor(private fb: UntypedFormBuilder, private fysikaService: FysikaService, public authService: AuthService,private confirmationService: ConfirmationService) {
+  constructor(private fysikaService: FysikaService, public authService: AuthService,private confirmationService: ConfirmationService) {
     this.isLoggedIn = authService.isLoggedIn$();
   }
 
   ngOnInit(): void {
-    this.itemForm = this.fb.group({
-      fldam: ['', Validators.required],
-      fldeponymo: ['', Validators.required],
-      fldonoma: ['', Validators.required],
-      fldpatronymo: ['', Validators.required],
-      flddiefthinsi: ['', Validators.required],
-      fldnomos: ['', Validators.required],
-      fldemail: ['', Validators.required],
-      fldtilefono: ['', Validators.required],
-      fldcertification: ['', Validators.required],
-      fldeidikotita: ['', Validators.required],
-      flda: [''],
-      fldb: [''],
-      fldc: [''],
-      fldd: ['']
+    this.itemForm = new FormGroup({
+      fldam: new FormControl<number>(0, Validators.required),
+      fldeponymo: new FormControl<string>('', Validators.required),
+      fldonoma: new FormControl<string>('', Validators.required),
+      fldpatronymo: new FormControl<string>('', Validators.required),
+      flddiefthinsi: new FormControl<string>('', Validators.required),
+      fldnomos: new FormControl<string>('', Validators.required),
+      fldemail: new FormControl<string>('', Validators.required),
+      fldtilefono: new FormControl<string>('', Validators.required),
+      fldcertification: new FormControl<string>('', Validators.required),
+      fldeidikotita: new FormControl<string>('', Validators.required),
+      flda: new FormControl<boolean>(false),
+      fldb: new FormControl<boolean>(false),
+      fldc: new FormControl<boolean>(false),
+      fldd: new FormControl<boolean>(false)
     });
     
     this.fetchtable();

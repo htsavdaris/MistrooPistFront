@@ -38,17 +38,17 @@ export class NomikalistComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemForm = new FormGroup({
-      fldam: new FormControl('', Validators.required),
+      fldam: new FormControl<number>(0, Validators.required),
       fldeponymia: new FormControl<string>('', Validators.required),
       fldypefthinos: new FormControl<string>('', Validators.required),
       flddiefthinsi: new FormControl<string>( '', Validators.required),
       fldnomos:new FormControl<string>( '', Validators.required),
       fldemail: new FormControl<string>('', Validators.required),
       fldtilefono: new FormControl<string>( '', Validators.required),
-      flda: new FormControl(false),
-      fldb: new FormControl( false),
-      fldc: new FormControl( false),
-      fldd: new FormControl( false)
+      flda: new FormControl<boolean>(false),
+      fldb: new FormControl<boolean>(false),
+      fldc: new FormControl<boolean>(false),
+      fldd: new FormControl<boolean>(false)
     });
     
     this.fetchtable();
