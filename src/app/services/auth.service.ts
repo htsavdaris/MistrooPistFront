@@ -5,7 +5,6 @@ import { retry, catchError, map } from 'rxjs/operators';
 
 import { Userauth } from '../models/userauth';
 import { Changepass } from '../models/changepass';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

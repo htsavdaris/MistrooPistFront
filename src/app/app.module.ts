@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './shared/layout/layout.component';
-import { JwtModule } from "@auth0/angular-jwt";
 
 
 
@@ -28,13 +27,6 @@ export function tokenGetter() {
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:5000"],
-        disallowedRoutes: ["http://localhost:5000/api/user/authenticate","http://localhost:5000/api/user/register"],
-      },
-    }),
     //NgprimeModule
   ],
   providers: [],
